@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <StepsForm />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import StepsForm from "./components/StepsForm.vue";
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    StepsForm,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
 }
+
+@import "~bootstrap/dist/css/bootstrap.css";
 </style>
