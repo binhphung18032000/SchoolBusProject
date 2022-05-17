@@ -21,7 +21,7 @@
           Cancel
         </button>
         <button
-          @click="next"
+          @click="onShowAppForm"
           type="submit"
           class="btn btn-primary font-size-20 ml-3"
         >
@@ -34,8 +34,10 @@
 
 <script>
 export default {
-  name: "ConfirmStep",
   methods: {
+    onShowAppForm() {
+      this.$emit("show-on");
+    },
     onClickCancelForm() {
       window.location = "http://www.chatsworth.com.sg";
     },
