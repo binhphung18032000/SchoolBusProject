@@ -205,32 +205,29 @@
                   <div class="text-center">
                     <label>
                       <input
-                        id="father"
                         value="father"
                         type="radio"
                         class="form-check-input"
-                        name="person-pick"
+                        name="parent-pick"
                         checked
                       />
                       Father
                     </label>
                     <label class="pl-15"
                       ><input
-                        id="father"
-                        value="father"
+                        value="mother"
                         type="radio"
                         class="form-check-input"
-                        name="person-pick"
+                        name="parent-pick"
                       />
                       Mother</label
                     >
                     <label class="pl-15"
                       ><input
-                        id="father"
-                        value="father"
+                        value="guardian"
                         type="radio"
                         class="form-check-input"
-                        name="person-pick"
+                        name="parent-pick"
                       />
                       Guardian</label
                     >
@@ -251,34 +248,34 @@
           <div class="col-md-12 wp-content">
             <div class="col-md-12">
               <div class="form-group col-md-3">
-                <label for="mom-email-address"
+                <label for="house-number"
                   >Block/ House Number
                   <span class="label-required">*</span></label
                 >
                 <input
-                  id="mom-email-address"
+                  id="house-number"
                   type="text"
                   class="form-control"
                   placeholder="eg: 123 / 123B"
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="mom-email-address"
+                <label for="street-name"
                   >Street Name <span class="label-required">*</span></label
                 >
                 <input
-                  id="mom-email-address"
+                  id="street-name"
                   type="text"
                   class="form-control"
                   placeholder="eg: Orchard Road"
                 />
               </div>
               <div class="form-group col-md-3">
-                <label for="mom-email-address"
+                <label for="postal-code"
                   >Postal Code <span class="label-required">*</span></label
                 >
                 <input
-                  id="mom-email-address"
+                  id="postal-code"
                   type="text"
                   class="form-control"
                   placeholder="eg: 123456"
@@ -287,20 +284,20 @@
             </div>
             <div class="col-md-12">
               <div class="form-group col-md-3">
-                <label for="mom-email-address">Unit Number </label>
+                <label for="unit-number">Unit Number </label>
                 <input
-                  id="mom-email-address"
+                  id="unit-number"
                   type="text"
                   class="form-control"
                   placeholder="eg: 01-15"
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="mom-email-address"
+                <label for="name-building"
                   >Name of Building / Condominium</label
                 >
                 <input
-                  id="mom-email-address"
+                  id="name-building"
                   type="text"
                   class="form-control"
                   placeholder="eg: Orchard Tower"
@@ -337,22 +334,20 @@
                 <div class="text-center">
                   <label>
                     <input
-                      id="father"
                       value="father"
                       type="radio"
                       class="form-check-input"
-                      name="person-pick"
+                      name="billing-pick"
                       checked
                     />
                     Father
                   </label>
                   <label class="pl-15"
                     ><input
-                      id="father"
-                      value="father"
+                      value="mother"
                       type="radio"
                       class="form-check-input"
-                      name="person-pick"
+                      name="billing-pick"
                     />
                     Mother</label
                   >
@@ -362,9 +357,9 @@
                       value="father"
                       type="radio"
                       class="form-check-input"
-                      name="person-pick"
+                      name="billing-pick"
                     />
-                    Guardian</label
+                    Details below</label
                   >
                 </div>
               </ul>
@@ -372,49 +367,41 @@
             <div class="col-md-3"></div>
             <div class="col-md-12">
               <div class="form-group col-md-6">
-                <label for="mom-email-address"
-                  >Name of Building / Condominium</label
-                >
+                <label for="name-company">Name of Company</label>
                 <input
-                  id="mom-email-address"
+                  id="name-company"
                   type="text"
                   class="form-control"
-                  placeholder="eg: Orchard Tower"
+                  placeholder="Please fill in full name. eg: Tree Pte Ltd"
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="mom-email-address"
-                  >Name of Building / Condominium</label
-                >
+                <label for="attention-to">Attention to</label>
                 <input
-                  id="mom-email-address"
+                  id="attention-to"
                   type="text"
                   class="form-control"
-                  placeholder="eg: Orchard Tower"
+                  placeholder="eg: John"
                 />
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group col-md-6">
-                <label for="mom-email-address"
-                  >Name of Building / Condominium</label
-                >
+                <label for="billing-address">Billing Address</label>
                 <input
-                  id="mom-email-address"
+                  id="billing-address"
                   type="text"
                   class="form-control"
-                  placeholder="eg: Orchard Tower"
+                  placeholder="Please fill in full address. eg: 3 Orchard Road, 01-15 Orchard Tower, Singapore 123456"
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="mom-email-address"
-                  >Name of Building / Condominium</label
-                >
+                <label for="billing-email-address">Email Address</label>
                 <input
-                  id="mom-email-address"
+                  id="billing-email-address"
                   type="text"
                   class="form-control"
-                  placeholder="eg: Orchard Tower"
+                  placeholder="eg: example@gmail.com"
                 />
               </div>
             </div>
@@ -425,7 +412,104 @@
             <p>Child/Children's Information</p>
             <i></i>
           </legend>
-          <div class="col-md-12 wp-content"></div>
+          <div class="col-md-12 wp-content">
+            <div class="col-md-8">
+              <div class="pl-13 font-weght-700">
+                <li style="list-style-type: decimal">Child</li>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="child-family-name"
+                  >Family name <span class="label-required">*</span></label
+                >
+                <input
+                  id="child-family-name"
+                  type="text"
+                  class="form-control"
+                  placeholder="eg: Waston"
+                />
+              </div>
+              <div class="form-group col-md-12">
+                <label for="child-given-name"
+                  >Given name <span class="label-required">*</span></label
+                >
+                <input
+                  id="child-given-name"
+                  type="text"
+                  class="form-control"
+                  placeholder="eg: Alice"
+                />
+              </div>
+              <div class="form-group col-md-12">
+                <label for="child-birth"
+                  >Date of Birth <span class="label-required">*</span></label
+                >
+                <input
+                  id="child-birth"
+                  type="text"
+                  class="form-control"
+                  placeholder="eg: dd/mm/yyyy"
+                />
+              </div>
+              <div class="form-group col-md-12">
+                <label for="child-student-id">Student ID</label>
+                <input
+                  id="child-student-id"
+                  type="text"
+                  class="form-control"
+                  placeholder="eg: 99985610001"
+                />
+              </div>
+              <div class="form-group col-md-12">
+                <label for="child-grade">Grade</label>
+                <input
+                  id="child-grade"
+                  type="text"
+                  class="form-control"
+                  placeholder="eg: G1"
+                />
+              </div>
+              <div class="form-group col-md-12">
+                <label for=""
+                  >Gender <span class="label-required">*</span></label
+                >
+                <label class="gender font-weight-label">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="gender"
+                    value="male"
+                    checked
+                  />
+                  Male
+                </label>
+                <label class="gender font-weight-label">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="gender"
+                    value="female"
+                  />
+                  Female
+                </label>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="child-date-service">Start date of service </label>
+                <select id="child-date-service" class="form-control">
+                  <option value="First day of semester">
+                    First day of semester
+                  </option>
+                  <option value="data">Choose date</option>
+                </select>
+              </div>
+              <div class="form-group col-md-12">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="eg: dd/mm/yyyy"
+                />
+              </div>
+            </div>
+          </div>
           <!---- END Child/Children's Information ---->
         </fieldset>
       </form>
@@ -503,5 +587,14 @@ label {
 
 .label-required {
   color: #ed7878;
+}
+
+/* .font-weight-lable {
+  font-weight: 500 !important;
+  background-color: rebeccapurple !important;
+} */
+
+.gender {
+  padding-left: 30px;
 }
 </style>
