@@ -50,6 +50,7 @@ export default {
   data() {
     return {
       isShowForm: false,
+      isHidden: false,
     };
   },
   methods: {
@@ -65,8 +66,9 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@900&display=swap");
 body {
-  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Lato", sans-serif !important;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
