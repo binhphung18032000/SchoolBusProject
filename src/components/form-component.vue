@@ -508,6 +508,17 @@
                   placeholder="eg: dd/mm/yyyy"
                 />
               </div>
+              <div class="form-group col-md-12">
+                <strong>For Regular Bus Service:</strong>
+                <label for="Route"
+                  >Route <span class="label-required">*</span></label
+                >
+                <ul class="list-route">
+                  <label for=""></label>
+                  <label for=""></label>
+                  <label for=""></label>
+                </ul>
+              </div>
             </div>
           </div>
           <!---- END Child/Children's Information ---->
