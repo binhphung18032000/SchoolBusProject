@@ -509,15 +509,141 @@
                 />
               </div>
               <div class="form-group col-md-12">
-                <strong>For Regular Bus Service:</strong>
-                <label for="Route"
+                <strong class="d-block">For Regular Bus Service:</strong>
+                <label class="ml-2" for="Route"
                   >Route <span class="label-required">*</span></label
                 >
                 <ul class="list-route">
-                  <label for=""></label>
-                  <label for=""></label>
-                  <label for=""></label>
+                  <label class="label-route d-block">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="route[1]"
+                    />
+                    2 Ways
+                  </label>
+                  <label class="label-route d-block">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="route[1]"
+                    />
+                    1 Way (AM)
+                  </label>
+                  <label class="label-route d-block">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="route[1]"
+                    />
+                    1 Way (PM)
+                  </label>
                 </ul>
+              </div>
+              <div class="form-group col-md-12">
+                <strong class="d-block"
+                  >For Cairnhill 9 Shuttle Service (Shuttle bus fees
+                  apply):</strong
+                >
+                <label class="ml-2" for="Route"
+                  >Route <span class="label-required">*</span></label
+                >
+                <ul class="list-route">
+                  <label class="label-route d-block">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="route[1]"
+                    />
+                    2 Ways
+                  </label>
+                  <label class="label-route d-block">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="route[1]"
+                    />
+                    1 Way (AM)
+                  </label>
+                  <label class="label-route d-block">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="route[1]"
+                    />
+                    1 Way (PM)
+                  </label>
+                </ul>
+              </div>
+              <div class="form-group col-md-12">
+                <p>
+                  Remarks: Invoice will be sent to parents once bus seat can be
+                  confirmed. Transport charges are paid twice a year, before the
+                  start of each semester.
+                </p>
+              </div>
+              <div class="form-group col-md-12">
+                <strong>
+                  <u>Shuttle Services:</u>
+                </strong>
+                <div class="form-group col-md-12 mt-3">
+                  <table class="shuttle-table">
+                    <thead class="shuttle-thead-table">
+                      <tr>
+                        <th class="text-center">Shuttle Services</th>
+                        <th class="text-center">Estimated Departure Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <u class="d-block">Morning</u>
+                          From Cairnhill 9
+                        </td>
+                        <td>8:00 am</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <u class="d-block">Afternoon</u>
+                          From School
+                        </td>
+                        <td>3:45 pm</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <strong>
+                  <p>
+                    Please be at the pick up point 10 minutes before the
+                    estimated departure time. For afternoon arrivals, please
+                    note that there is a no waiting policy for the shuttle
+                    buses.
+                  </p>
+                  <p>
+                    Parents who wish to ensure that their child will be
+                    accompanied when they alight from the bus must ensure that
+                    they are present and waiting before the bus arrives. The
+                    Shuttle buses will not wait for parents to pick up their
+                    children.
+                  </p>
+                </strong>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="medical-conditions">Medical conditions</label>
+                <textarea
+                  name="medical[1]"
+                  id="medical-conditions"
+                  class="form-control medical-conditions"
+                  placeholder="Please include any medical condition that we need to take note of"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center">
+                <label for="photo">Recent photo of child</label>
+              </div>
+              <div class="text-center">
+                <div class="upload-demo croppie-container"></div>
               </div>
             </div>
           </div>
@@ -529,6 +655,14 @@
 </template>
 
 <style>
+#schoolBusForm {
+  font-size: 14px;
+  color: #333;
+}
+
+p {
+  margin: 0 0 10px !important;
+}
 /* Responsive */
 @media (min-width: 992px) {
   .col-md-1,
@@ -607,5 +741,32 @@ label {
 
 .gender {
   padding-left: 30px;
+}
+
+.shuttle-table {
+  border: solid 1px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.shuttle-table tr th,
+.shuttle-table tr td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.shuttle-table tr td {
+  border: 1px solid;
+}
+
+.shuttle-thead-table {
+  background-color: #e2e2e2;
+  color: #000000;
+}
+
+.medical-conditions {
+  min-height: 70px;
 }
 </style>
