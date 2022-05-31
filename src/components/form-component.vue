@@ -639,15 +639,204 @@
               </div>
             </div>
             <div class="col-md-4">
-              <div class="text-center">
-                <label for="photo">Recent photo of child</label>
+              <div class="col-md-12">
+                <a href="#" class="pull-right btn-remove removeChild">
+                  <span
+                    class="glyphicon glyphicon-remove hidden"
+                    id="iconRemoveChild"
+                  ></span>
+                </a>
+                &nbsp;
               </div>
               <div class="text-center">
-                <div class="upload-demo croppie-container"></div>
+                <label for="photo" class="padding-left-7"
+                  >Recent photo of child</label
+                >
               </div>
+              <div class="profile-container text-center">
+                <div><img src="" class="old_profile_img hidden" /></div>
+                <div class="upload-demo croppie-container">
+                  <div
+                    class="cr-boundary"
+                    style="height: 300px; max-width: 300px"
+                  >
+                    <img
+                      class="cr-image"
+                      style="
+                        transform: translate3d(0px, 0px, 0px) scale(0);
+                        transform-origin: 0px 0px;
+                      "
+                    />
+                    <div
+                      class="cr-viewport cr-vp-square"
+                      tabindex="0"
+                      style="width: 200px; height: 200px"
+                    ></div>
+                    <div
+                      class="cr-overlay"
+                      style="width: 0px; height: 0px; top: 0px; left: 0px"
+                    ></div>
+                  </div>
+                  <div class="cr-slider-wrap">
+                    <input class="cr-slider" type="range" step="0.0001" />
+                  </div>
+                </div>
+                <input type="file" class="hidden upload" />
+                <input type="hidden" class="profileImg" name="profileImg[1]" />
+                <a class="btn btn-info btnUpload">Upload Image</a>
+              </div>
+            </div>
+            <div class="col-md-12"><hr class="green-line" /></div>
+            <div class="col-md-12 text-center">
+              <a class="btn btn-add-more-child" id="addMoreChild"
+                >Add more children</a
+              >
+              <hr />
             </div>
           </div>
           <!---- END Child/Children's Information ---->
+          <div class="col-md-10 col-md-offset-1 term">
+            <p>
+              Please read the
+              <a href="T&C-Chatsworth.pdf" class="text-green" target="_blank"
+                ><strong>Terms and Conditions & Bus Regulations</strong></a
+              >
+              carefully. This forms an integral part of our agreement in respect
+              to bus transportation for your child. By submitting this form, you
+              confirm that you agree to the terms and conditions contained
+              herein and undertake to take responsibility for your child's
+              adherence to the same.
+            </p>
+            <p>
+              Applications must be received within the deadlines stipulated.
+              <strong class="text-green"
+                >Your application will take between 2 to 4 weeks to be
+                processed.</strong
+              >
+              During high traffic periods, your application may take a little
+              longer to be processed. You will be informed of the results of
+              your application by email. Bus information will be sent to the
+              email indicated by you to be the first point of contact. Please
+              note that a seat for your child can only be confirmed when full
+              payments has been received.
+            </p>
+            <p>
+              All students are required to purchase a beacon. The beacon is a
+              security feature that allows us to ascertain your child’s location
+              when he is a rider on the bus on the bus. The yearly subscription
+              of $25 (before GST) will be charged to your child’s transport
+              fares. Replacement beacons are charged at $25 (before GST) a
+              piece. These beacons are
+              <strong class="text-green">non-transferable.</strong> Students on
+              Shuttle buses do not need a beacon for travel.
+            </p>
+            <p>
+              Bus Details will be provided to you via email. Please ensure that
+              the email addresses provided to us are valid and are readily
+              accessible by you.
+            </p>
+            <p>
+              When using the School Bus Transport Service, the use of Child
+              Safety Restraint (CSR)- (Ride Safer Vest) for all students up to
+              Year 1 is strongly encouraged. Students who are less than 1.35
+              meters in height are recommended to use the approved Ride Safer
+              Vest or Mifold booster seat (as per School Safety standard).
+            </p>
+            <p>
+              School approved CSR products are available and can be purchased
+              directly from Taxi Baby :<a
+                href="https://sg.taxibaby.com/"
+                target="_blank"
+                >https://sg.taxibaby.com/</a
+              >
+            </p>
+            <p>
+              You can contact us at
+              <a href="mailto:chatsworth@tongtar.com">chatsworth@tongtar.com</a>
+              or approach the Transport Coordinator in school. Alternatively,
+              you can also ring us at
+              <a href="tel:6261 5537">6261 5537</a> during office hours (8.30am
+              to 4.00pm) and ask to speak with the School Transport Team.
+            </p>
+          </div>
+          <div class="col-md-12 text-center">
+            <ul class="agreeTermContainer text-center">
+              <div>
+                <label class="text-center">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="agreeTerm"
+                    id="agreeTerm"
+                    value="1"
+                  />
+                  I agree to the
+                  <a
+                    href="T&C-Chatsworth.pdf"
+                    class="text-green"
+                    target="_blank"
+                  >
+                    terms of service</a
+                  >
+                </label>
+              </div>
+            </ul>
+          </div>
+          <div
+            class="col-md-8 col-md-offset-2 text-center"
+            style="padding: unset"
+          >
+            <ul class="agreePDPAContainer text-center" style="padding: unset">
+              <div>
+                <label class="text-center">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="agreePDPA"
+                    id="agreePDPA"
+                    value="1"
+                  />
+                  I acknowledge that I have read and understood the
+                  <a
+                    href="../project/PDPA.pdf"
+                    class="text-green"
+                    target="_blank"
+                    >Data Protection Notice</a
+                  >, and consent to the collection, use and disclosure of my
+                  personal data by Tong Tar Transport Service Pte Ltd for the
+                  purposes set out in the Notice.
+                </label>
+              </div>
+            </ul>
+          </div>
+          <div class="col-md-12 text-center">
+            <div
+              class="alert alert-danger hidden"
+              role="alert"
+              id="errorEmailAlert"
+            >
+              <strong>Parent email does not match the previous email!</strong>
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-add-more-child" id="submit">
+              Submit
+            </button>
+          </div>
+
+          <div class="col-md-12 text-center copyright">
+            <p>
+              Copyright &copy; 2017 Tong Tar Transport Service Pte Ltd | 8 Soon
+              Lee Road Singapore 628073 Tel:
+              <a href="tel:6261 5537">6261 5537</a> Fax: 6268 6620 Email:
+              <a href="mailto:chatsworth@tongtar.com">chatsworth@tongtar.com</a>
+              Website:
+              <a href="http://www.tongtar.com/" target="_black"
+                >www.tongtar.com</a
+              ><br />
+              All rights reserved.
+            </p>
+          </div>
         </fieldset>
       </form>
     </div>
@@ -768,5 +957,25 @@ label {
 
 .medical-conditions {
   min-height: 70px;
+}
+
+.profile-container {
+  position: relative;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.term {
+  text-align: justify;
+}
+
+.col-md-offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.text-green {
+  color: #006d29;
 }
 </style>
