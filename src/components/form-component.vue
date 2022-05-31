@@ -683,7 +683,7 @@
                 </div>
                 <input type="file" class="hidden upload" />
                 <input type="hidden" class="profileImg" name="profileImg[1]" />
-                <a class="btn btn-info btnUpload">Upload Image</a>
+                <a class="btn btn-info btnUpload" id="">Upload Image</a>
               </div>
             </div>
             <div class="col-md-12"><hr class="green-line" /></div>
