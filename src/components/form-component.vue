@@ -978,4 +978,28 @@ label {
 .text-green {
   color: #006d29;
 }
+
+.col-md-offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.btn-add-more-child {
+  width: 200px;
+  background-color: #3c3e3c;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+.btn-add-more-child:hover {
+  width: 200px;
+  background-color: #006d29;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.copyright {
+  font-size: 11px;
+  padding-top: 20px;
+  margin-bottom: 0px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
 </style>
