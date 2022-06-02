@@ -638,54 +638,9 @@
                 ></textarea>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <a href="#" class="pull-right btn-remove removeChild">
-                  <span
-                    class="glyphicon glyphicon-remove hidden"
-                    id="iconRemoveChild"
-                  ></span>
-                </a>
-                &nbsp;
-              </div>
-              <div class="text-center">
-                <label for="photo" class="padding-left-7"
-                  >Recent photo of child</label
-                >
-              </div>
-              <div class="profile-container text-center">
-                <div><img src="" class="old_profile_img hidden" /></div>
-                <div class="upload-demo croppie-container">
-                  <div
-                    class="cr-boundary"
-                    style="height: 300px; max-width: 300px"
-                  >
-                    <img
-                      class="cr-image"
-                      style="
-                        transform: translate3d(0px, 0px, 0px) scale(0);
-                        transform-origin: 0px 0px;
-                      "
-                    />
-                    <div
-                      class="cr-viewport cr-vp-square"
-                      tabindex="0"
-                      style="width: 200px; height: 200px"
-                    ></div>
-                    <div
-                      class="cr-overlay"
-                      style="width: 0px; height: 0px; top: 0px; left: 0px"
-                    ></div>
-                  </div>
-                  <div class="cr-slider-wrap">
-                    <input class="cr-slider" type="range" step="0.0001" />
-                  </div>
-                </div>
-                <input type="file" class="hidden upload" />
-                <input type="hidden" class="profileImg" name="profileImg[1]" />
-                <a class="btn btn-info btnUpload" id="">Upload Image</a>
-              </div>
-            </div>
+
+            <div class="col-md-4"></div>
+
             <div class="col-md-12"><hr class="green-line" /></div>
             <div class="col-md-12 text-center">
               <a class="btn btn-add-more-child" id="addMoreChild"
