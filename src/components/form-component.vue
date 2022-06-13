@@ -639,7 +639,41 @@
               </div>
             </div>
 
-            <div class="col-md-4"></div>
+            <!-- UPLOAD IMAGE -->
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <a href="#" class="pull-right btn-remove removeChild">
+                  <span
+                    class="glyphicon glyphicon-remove hidden"
+                    id="iconRemoveChild"
+                  ></span>
+                </a>
+                &nbsp;
+              </div>
+              <div class="text-center">
+                <label for="photo" class="padding-left-7"
+                  >Recent photo of child</label
+                >
+              </div>
+              <div class="profile-container text-center">
+                <div>
+                  <img :src="imageUrl" class="old_profile_img" />
+                </div>
+                <div class="upload-demo"></div>
+                <input
+                  type="file"
+                  class="hidden upload"
+                  ref="fileInput"
+                  accept="image/*"
+                  @change="onFilePicked"
+                />
+                <input type="hidden" class="profileImg" name="profileImg[1]" />
+                <a class="btn btn-info btnUpload" @click="onPickFile"
+                  >Upload Image</a
+                >
+              </div>
+            </div>
+            <!-- END UPLOAD IMAGE -->
 
             <div class="col-md-12"><hr class="green-line" /></div>
             <div class="col-md-12 text-center">
@@ -798,6 +832,36 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      imageUrl: "",
+      image: null,
+    };
+  },
+  methods: {
+    onPickFile() {
+      this.$refs.fileInput.click();
+    },
+
+    onFilePicked(event) {
+      const files = event.target.files;
+      let filename = files[0].name;
+      if (filename.lastIndexOf(".") <= 0) {
+        return alert("Please add a valid file!");
+      }
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        this.imageUrl = fileReader.result;
+      });
+      fileReader.readAsDataURL(files[0]);
+      this.image = files[0];
+    },
+  },
+};
+</script>
+
 <style>
 #schoolBusForm {
   font-size: 14px;
@@ -918,6 +982,14 @@ label {
   position: relative;
 }
 
+.profile-container:hover .image {
+  opacity: 0.3;
+}
+
+.profile-container:hover .middle {
+  opacity: 1;
+}
+
 .hidden {
   display: none !important;
 }
@@ -956,5 +1028,17 @@ label {
   padding-top: 20px;
   margin-bottom: 0px;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.btn-info {
+  color: #fff !important;
+  background-color: #5bc0de !important;
+  border-color: #46b8da !important;
+}
+
+.btn-info:hover {
+  color: #fff !important;
+  background-color: #31b0d5 !important;
+  border-color: #269abc !important;
 }
 </style>
