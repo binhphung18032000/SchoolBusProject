@@ -656,35 +656,16 @@
                 >
               </div>
               <div class="profile-container text-center">
-                <div>
-                  <img :src="imageUrl" class="old_profile_img hidden" />
-                </div>
-                <div class="upload-demo croppie-container">
-                  <div class="cr-boundary" style="height: 300px">
-                    <img
-                      v-bind:src="imageUrl"
-                      class="cr-image"
-                      style="width: 100%; height: 100%"
-                    />
-                    <div
-                      class="cr-viewport cr-vp-square"
-                      tabindex="0"
-                      style="width: 200px; height: 200px"
-                    ></div>
-                    <div class="cr-overlay"></div>
-                  </div>
-                  <div class="cr-slider-wrap">
-                    <input class="cr-slider" type="range" step="0.0001" />
-                  </div>
-                </div>
+                <CroppieImage
+                  :ref="`croppieRef1`"
+                  :refID="`croppieRef1`"
+                ></CroppieImage>
                 <input
+                  class="hidden"
+                  @change="changeImage"
                   type="file"
-                  class="hidden upload"
                   ref="fileInput"
-                  accept="image/*"
-                  @change="onFilePicked"
                 />
-                <input type="hidden" class="profileImg" name="profileImg[1]" />
                 <a class="btn btn-info btnUpload" @click="onPickFile"
                   >Upload Image</a
                 >
@@ -850,7 +831,23 @@
 </template>
 
 <script>
+if (document.querySelectorAll('[src="/croppie/jquery.min.js"]').length < 1) {
+  const pluginJquery = document.createElement("script");
+  pluginJquery.setAttribute("src", "/croppie/jquery.min.js");
+  pluginJquery.async = true;
+  document.head.appendChild(pluginJquery);
+}
+if (document.querySelectorAll('[src="/croppie/croppie.min.js"]').length < 1) {
+  const pluginJqueryCroppie = document.createElement("script");
+  pluginJqueryCroppie.setAttribute("src", "/croppie/croppie.min.js");
+  pluginJqueryCroppie.async = true;
+  document.head.appendChild(pluginJqueryCroppie);
+}
+import CroppieImage from "./CroppieImage.vue";
 export default {
+  components: {
+    CroppieImage,
+  },
   data() {
     return {
       imageUrl: "",
@@ -858,10 +855,22 @@ export default {
     };
   },
   methods: {
+    changeImage(input) {
+      const vm = this;
+      if (input.target.files && input.target.files[0]) {
+        let reader = new FileReader();
+        reader.readAsDataURL(input.target.files[0]);
+        reader.onload = function (e) {
+          let rawImg = e.target.result;
+          vm.$refs["croppieRef1"].bindCroppie(
+            JSON.parse(JSON.stringify(rawImg))
+          );
+        };
+      }
+    },
     onPickFile() {
       this.$refs.fileInput.click();
     },
-
     onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
@@ -880,6 +889,7 @@ export default {
 </script>
 
 <style>
+@import "@/assets/scss/croppie.min.css";
 #schoolBusForm {
   font-size: 14px;
   color: #333;
@@ -958,11 +968,6 @@ label {
 .label-required {
   color: #ed7878;
 }
-
-/* .font-weight-lable {
-  font-weight: 500 !important;
-  background-color: rebeccapurple !important;
-} */
 
 .gender {
   padding-left: 30px;
