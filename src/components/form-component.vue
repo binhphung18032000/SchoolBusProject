@@ -214,6 +214,7 @@
                     type="checkbox"
                     class="form-check-input"
                     name="person-pick"
+                    v-model="dataForm.billing_address.same_as_above"
                   />
                   Same as above
                 </label>
@@ -231,7 +232,7 @@
                       type="radio"
                       class="form-check-input"
                       name="billing-pick"
-                      checked
+                      v-model="dataForm.billing_address.regard_payment"
                     />
                     Father
                   </label>
@@ -241,16 +242,17 @@
                       type="radio"
                       class="form-check-input"
                       name="billing-pick"
+                      v-model="dataForm.billing_address.regard_payment"
                     />
                     Mother</label
                   >
                   <label class="pl-15"
                     ><input
-                      id="father"
-                      value="father"
+                      value="details-below"
                       type="radio"
                       class="form-check-input"
                       name="billing-pick"
+                      v-model="dataForm.billing_address.regard_payment"
                     />
                     Details below</label
                   >
@@ -266,6 +268,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Please fill in full name. eg: Tree Pte Ltd"
+                  v-model="dataForm.billing_address.name_Company"
                 />
               </div>
               <div class="form-group col-md-6">
@@ -275,6 +278,7 @@
                   type="text"
                   class="form-control"
                   placeholder="eg: John"
+                  v-model="dataForm.billing_address.attention_to"
                 />
               </div>
             </div>
@@ -286,6 +290,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Please fill in full address. eg: 3 Orchard Road, 01-15 Orchard Tower, Singapore 123456"
+                  v-model="dataForm.billing_address.billing_address"
                 />
               </div>
               <div class="form-group col-md-6">
@@ -295,6 +300,7 @@
                   type="text"
                   class="form-control"
                   placeholder="eg: example@gmail.com"
+                  v-model="dataForm.billing_address.email_address"
                 />
               </div>
             </div>
@@ -307,10 +313,15 @@
           </legend>
           <div class="col-md-12 wp-content">
             <!-- add more form children if needed -->
-            <div class="add-more-form">
+            <div
+              class="add-more-form"
+              v-for="(child, index) in dataForm.Children"
+              :key="index"
+            >
               <div class="col-md-8">
                 <div class="pl-13 font-weght-700">
-                  <li style="list-style-type: decimal">Child</li>
+                  <!-- <li style="list-style-type: decimal">Child</li> -->
+                  <li style="list-style-type: decimal">dsadasd</li>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="child-family-name"
@@ -373,7 +384,6 @@
                       class="form-check-input"
                       name="gender"
                       value="male"
-                      checked
                     />
                     Male
                   </label>
@@ -411,6 +421,7 @@
                   <ul class="list-route">
                     <label class="label-route d-block">
                       <input
+                        value="two-way"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
@@ -419,6 +430,7 @@
                     </label>
                     <label class="label-route d-block">
                       <input
+                        value="am-way"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
@@ -427,6 +439,7 @@
                     </label>
                     <label class="label-route d-block">
                       <input
+                        value="pm-way"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
@@ -446,25 +459,28 @@
                   <ul class="list-route">
                     <label class="label-route d-block">
                       <input
+                        value="two-way"
                         type="radio"
                         class="form-check-input"
-                        name="route[1]"
+                        name="route[2]"
                       />
                       2 Ways
                     </label>
                     <label class="label-route d-block">
                       <input
+                        value="am-way"
                         type="radio"
                         class="form-check-input"
-                        name="route[1]"
+                        name="route[2]"
                       />
                       1 Way (AM)
                     </label>
                     <label class="label-route d-block">
                       <input
+                        value="pm-way"
                         type="radio"
                         class="form-check-input"
-                        name="route[1]"
+                        name="route[2]"
                       />
                       1 Way (PM)
                     </label>
@@ -793,6 +809,30 @@ export default {
           unit_number: "duy",
           name_of_building_condominium: "thịnh",
         },
+        billing_address: {
+          same_as_above: false,
+          regard_payment: "mother",
+          name_Company: "antking",
+          attention_to: "CVPM Quang Trung",
+          billing_address: "Tòa nhà SBI 305",
+          email_address: "antking@gmail.com",
+        },
+        Children: [
+          {
+            title: "Child",
+            family_name: "Ngô",
+            given_name: "Dương",
+            date_of_birth: "18-03-2000",
+            Student_id: "2001180224",
+            grade: "11",
+            gender: "male",
+            start_date: ["23-03-2022"],
+            regular_bus_service: "two-way",
+            shuttle_service: "two-way",
+            medical_conditions: "hello mấy cưng. Cỗ dũ cho anh nào!",
+            image_result: "",
+          },
+        ],
       },
       // count: 1,
     };
