@@ -9,8 +9,12 @@
             <i></i>
           </legend>
           <div class="col-md-12 wp-content">
-            <div class="col-md-4">
-              <label for="">1. Father/Guardian</label>
+            <div
+              class="col-md-4"
+              v-for="(parent, index) in dataForm.parents"
+              :key="index"
+            >
+              <label for="">{{ index + 1 }}.{{ parent.title }}</label>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="family-name"
@@ -21,6 +25,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: Waston"
+                    v-model="parent.family_name"
                   />
                 </div>
                 <div class="form-group">
@@ -32,6 +37,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: John"
+                    v-model="parent.first_name"
                   />
                 </div>
                 <div class="form-group">
@@ -44,6 +50,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: 9876 5883"
+                    v-model="parent.mobile_phone"
                   />
                 </div>
                 <div class="form-group">
@@ -55,6 +62,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: 6273 8885 / 9876 5484"
+                    v-model="parent.office_phone"
                   />
                 </div>
                 <div class="form-group">
@@ -66,131 +74,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: example@gmail.com"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label for="">2. Mother/Guardian</label>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="mom-family-name"
-                    >Family Name <span class="label-required">*</span></label
-                  >
-                  <input
-                    id="mom-family-name"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: Waston"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="mom-first-name"
-                    >First Name <span class="label-required">*</span></label
-                  >
-                  <input
-                    id="mom-first-name"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: John"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="mom-mobile-phone"
-                    >Mobile Phone (+65)
-                    <span class="label-required">*</span></label
-                  >
-                  <input
-                    id="mom-mobile-phone"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: 9876 5883"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="mom-office-phone"
-                    >Office Phone (+65)<span class="label-required"></span
-                  ></label>
-                  <input
-                    id="mom-office-phone"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: 6273 8885 / 9876 5484"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="mom-email-address"
-                    >Email Address <span class="label-required">*</span></label
-                  >
-                  <input
-                    id="mom-email-address"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: example@gmail.com"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label for=""
-                >3. Authorized Person (for Afternoon pick ups, if
-                necessary)</label
-              >
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="author-family-name"
-                    >Family Name <span class="label-required">*</span></label
-                  >
-                  <input
-                    id="author-family-name"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: Waston"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="author-first-name"
-                    >First Name <span class="label-required">*</span></label
-                  >
-                  <input
-                    id="author-first-name"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: John"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="author-mobile-phone"
-                    >Mobile Phone (+65)
-                    <span class="label-required">*</span></label
-                  >
-                  <input
-                    id="author-mobile-phone"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: 9876 5883"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="author-office-phone"
-                    >Office Phone (+65)<span class="label-required"></span
-                  ></label>
-                  <input
-                    id="author-office-phone"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: 6273 8885 / 9876 5484"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="author-email-address"
-                    >Email Address <span class="label-required"></span
-                  ></label>
-                  <input
-                    id="author-email-address"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: example@gmail.com"
+                    v-model="parent.email_address"
                   />
                 </div>
               </div>
@@ -209,7 +93,7 @@
                         type="radio"
                         class="form-check-input"
                         name="parent-pick"
-                        checked
+                        v-model="dataForm.first_contact"
                       />
                       Father
                     </label>
@@ -219,6 +103,7 @@
                         type="radio"
                         class="form-check-input"
                         name="parent-pick"
+                        v-model="dataForm.first_contact"
                       />
                       Mother</label
                     >
@@ -228,6 +113,7 @@
                         type="radio"
                         class="form-check-input"
                         name="parent-pick"
+                        v-model="dataForm.first_contact"
                       />
                       Guardian</label
                     >
@@ -257,6 +143,7 @@
                   type="text"
                   class="form-control"
                   placeholder="eg: 123 / 123B"
+                  v-model="dataForm.pick_drop_address.block_house_number"
                 />
               </div>
               <div class="form-group col-md-6">
@@ -268,6 +155,7 @@
                   type="text"
                   class="form-control"
                   placeholder="eg: Orchard Road"
+                  v-model="dataForm.pick_drop_address.street_name"
                 />
               </div>
               <div class="form-group col-md-3">
@@ -279,6 +167,7 @@
                   type="text"
                   class="form-control"
                   placeholder="eg: 123456"
+                  v-model="dataForm.pick_drop_address.postal_code"
                 />
               </div>
             </div>
@@ -290,6 +179,7 @@
                   type="text"
                   class="form-control"
                   placeholder="eg: 01-15"
+                  v-model="dataForm.pick_drop_address.unit_number"
                 />
               </div>
               <div class="form-group col-md-6">
@@ -301,6 +191,9 @@
                   type="text"
                   class="form-control"
                   placeholder="eg: Orchard Tower"
+                  v-model="
+                    dataForm.pick_drop_address.name_of_building_condominium
+                  "
                 />
               </div>
             </div>
@@ -413,267 +306,278 @@
             <i></i>
           </legend>
           <div class="col-md-12 wp-content">
-            <div class="col-md-8">
-              <div class="pl-13 font-weght-700">
-                <li style="list-style-type: decimal">Child</li>
-              </div>
-              <div class="form-group col-md-12">
-                <label for="child-family-name"
-                  >Family name <span class="label-required">*</span></label
-                >
-                <input
-                  id="child-family-name"
-                  type="text"
-                  class="form-control"
-                  placeholder="eg: Waston"
-                />
-              </div>
-              <div class="form-group col-md-12">
-                <label for="child-given-name"
-                  >Given name <span class="label-required">*</span></label
-                >
-                <input
-                  id="child-given-name"
-                  type="text"
-                  class="form-control"
-                  placeholder="eg: Alice"
-                />
-              </div>
-              <div class="form-group col-md-12">
-                <label for="child-birth"
-                  >Date of Birth <span class="label-required">*</span></label
-                >
-                <input
-                  id="child-birth"
-                  type="text"
-                  class="form-control"
-                  placeholder="eg: dd/mm/yyyy"
-                />
-              </div>
-              <div class="form-group col-md-12">
-                <label for="child-student-id">Student ID</label>
-                <input
-                  id="child-student-id"
-                  type="text"
-                  class="form-control"
-                  placeholder="eg: 99985610001"
-                />
-              </div>
-              <div class="form-group col-md-12">
-                <label for="child-grade">Grade</label>
-                <input
-                  id="child-grade"
-                  type="text"
-                  class="form-control"
-                  placeholder="eg: G1"
-                />
-              </div>
-              <div class="form-group col-md-12">
-                <label for=""
-                  >Gender <span class="label-required">*</span></label
-                >
-                <label class="gender font-weight-label">
-                  <input
-                    type="radio"
-                    class="form-check-input"
-                    name="gender"
-                    value="male"
-                    checked
-                  />
-                  Male
-                </label>
-                <label class="gender font-weight-label">
-                  <input
-                    type="radio"
-                    class="form-check-input"
-                    name="gender"
-                    value="female"
-                  />
-                  Female
-                </label>
-              </div>
-              <div class="form-group col-md-12">
-                <label for="child-date-service">Start date of service </label>
-                <select id="child-date-service" class="form-control">
-                  <option value="First day of semester">
-                    First day of semester
-                  </option>
-                  <option value="data">Choose date</option>
-                </select>
-              </div>
-              <div class="form-group col-md-12">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="eg: dd/mm/yyyy"
-                />
-              </div>
-              <div class="form-group col-md-12">
-                <strong class="d-block">For Regular Bus Service:</strong>
-                <label class="ml-2" for="Route"
-                  >Route <span class="label-required">*</span></label
-                >
-                <ul class="list-route">
-                  <label class="label-route d-block">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      name="route[1]"
-                    />
-                    2 Ways
-                  </label>
-                  <label class="label-route d-block">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      name="route[1]"
-                    />
-                    1 Way (AM)
-                  </label>
-                  <label class="label-route d-block">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      name="route[1]"
-                    />
-                    1 Way (PM)
-                  </label>
-                </ul>
-              </div>
-              <div class="form-group col-md-12">
-                <strong class="d-block"
-                  >For Cairnhill 9 Shuttle Service (Shuttle bus fees
-                  apply):</strong
-                >
-                <label class="ml-2" for="Route"
-                  >Route <span class="label-required">*</span></label
-                >
-                <ul class="list-route">
-                  <label class="label-route d-block">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      name="route[1]"
-                    />
-                    2 Ways
-                  </label>
-                  <label class="label-route d-block">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      name="route[1]"
-                    />
-                    1 Way (AM)
-                  </label>
-                  <label class="label-route d-block">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      name="route[1]"
-                    />
-                    1 Way (PM)
-                  </label>
-                </ul>
-              </div>
-              <div class="form-group col-md-12">
-                <p>
-                  Remarks: Invoice will be sent to parents once bus seat can be
-                  confirmed. Transport charges are paid twice a year, before the
-                  start of each semester.
-                </p>
-              </div>
-              <div class="form-group col-md-12">
-                <strong>
-                  <u>Shuttle Services:</u>
-                </strong>
-                <div class="form-group col-md-12 mt-3">
-                  <table class="shuttle-table">
-                    <thead class="shuttle-thead-table">
-                      <tr>
-                        <th class="text-center">Shuttle Services</th>
-                        <th class="text-center">Estimated Departure Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <u class="d-block">Morning</u>
-                          From Cairnhill 9
-                        </td>
-                        <td>8:00 am</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <u class="d-block">Afternoon</u>
-                          From School
-                        </td>
-                        <td>3:45 pm</td>
-                      </tr>
-                    </tbody>
-                  </table>
+            <!-- add more form children if needed -->
+            <div class="add-more-form">
+              <div class="col-md-8">
+                <div class="pl-13 font-weght-700">
+                  <li style="list-style-type: decimal">Child</li>
                 </div>
-                <strong>
+                <div class="form-group col-md-12">
+                  <label for="child-family-name"
+                    >Family name <span class="label-required">*</span></label
+                  >
+                  <input
+                    id="child-family-name"
+                    type="text"
+                    class="form-control"
+                    placeholder="eg: Waston"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="child-given-name"
+                    >Given name <span class="label-required">*</span></label
+                  >
+                  <input
+                    id="child-given-name"
+                    type="text"
+                    class="form-control"
+                    placeholder="eg: Alice"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="child-birth"
+                    >Date of Birth <span class="label-required">*</span></label
+                  >
+                  <input
+                    id="child-birth"
+                    type="text"
+                    class="form-control"
+                    placeholder="eg: dd/mm/yyyy"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="child-student-id">Student ID</label>
+                  <input
+                    id="child-student-id"
+                    type="text"
+                    class="form-control"
+                    placeholder="eg: 99985610001"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="child-grade">Grade</label>
+                  <input
+                    id="child-grade"
+                    type="text"
+                    class="form-control"
+                    placeholder="eg: G1"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for=""
+                    >Gender <span class="label-required">*</span></label
+                  >
+                  <label class="gender font-weight-label">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="gender"
+                      value="male"
+                      checked
+                    />
+                    Male
+                  </label>
+                  <label class="gender font-weight-label">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      name="gender"
+                      value="female"
+                    />
+                    Female
+                  </label>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="child-date-service">Start date of service </label>
+                  <select id="child-date-service" class="form-control">
+                    <option value="First day of semester">
+                      First day of semester
+                    </option>
+                    <option value="data">Choose date</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="eg: dd/mm/yyyy"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <strong class="d-block">For Regular Bus Service:</strong>
+                  <label class="ml-2" for="Route"
+                    >Route <span class="label-required">*</span></label
+                  >
+                  <ul class="list-route">
+                    <label class="label-route d-block">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        name="route[1]"
+                      />
+                      2 Ways
+                    </label>
+                    <label class="label-route d-block">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        name="route[1]"
+                      />
+                      1 Way (AM)
+                    </label>
+                    <label class="label-route d-block">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        name="route[1]"
+                      />
+                      1 Way (PM)
+                    </label>
+                  </ul>
+                </div>
+                <div class="form-group col-md-12">
+                  <strong class="d-block"
+                    >For Cairnhill 9 Shuttle Service (Shuttle bus fees
+                    apply):</strong
+                  >
+                  <label class="ml-2" for="Route"
+                    >Route <span class="label-required">*</span></label
+                  >
+                  <ul class="list-route">
+                    <label class="label-route d-block">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        name="route[1]"
+                      />
+                      2 Ways
+                    </label>
+                    <label class="label-route d-block">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        name="route[1]"
+                      />
+                      1 Way (AM)
+                    </label>
+                    <label class="label-route d-block">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        name="route[1]"
+                      />
+                      1 Way (PM)
+                    </label>
+                  </ul>
+                </div>
+                <div class="form-group col-md-12">
                   <p>
-                    Please be at the pick up point 10 minutes before the
-                    estimated departure time. For afternoon arrivals, please
-                    note that there is a no waiting policy for the shuttle
-                    buses.
+                    Remarks: Invoice will be sent to parents once bus seat can
+                    be confirmed. Transport charges are paid twice a year,
+                    before the start of each semester.
                   </p>
-                  <p>
-                    Parents who wish to ensure that their child will be
-                    accompanied when they alight from the bus must ensure that
-                    they are present and waiting before the bus arrives. The
-                    Shuttle buses will not wait for parents to pick up their
-                    children.
-                  </p>
-                </strong>
+                </div>
+                <div class="form-group col-md-12">
+                  <strong>
+                    <u>Shuttle Services:</u>
+                  </strong>
+                  <div class="form-group col-md-12 mt-3">
+                    <table class="shuttle-table">
+                      <thead class="shuttle-thead-table">
+                        <tr>
+                          <th class="text-center">Shuttle Services</th>
+                          <th class="text-center">Estimated Departure Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <u class="d-block">Morning</u>
+                            From Cairnhill 9
+                          </td>
+                          <td>8:00 am</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <u class="d-block">Afternoon</u>
+                            From School
+                          </td>
+                          <td>3:45 pm</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <strong>
+                    <p>
+                      Please be at the pick up point 10 minutes before the
+                      estimated departure time. For afternoon arrivals, please
+                      note that there is a no waiting policy for the shuttle
+                      buses.
+                    </p>
+                    <p>
+                      Parents who wish to ensure that their child will be
+                      accompanied when they alight from the bus must ensure that
+                      they are present and waiting before the bus arrives. The
+                      Shuttle buses will not wait for parents to pick up their
+                      children.
+                    </p>
+                  </strong>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="medical-conditions">Medical conditions</label>
+                  <textarea
+                    name="medical[1]"
+                    id="medical-conditions"
+                    class="form-control medical-conditions"
+                    placeholder="Please include any medical condition that we need to take note of"
+                  ></textarea>
+                </div>
               </div>
-              <div class="form-group col-md-12">
-                <label for="medical-conditions">Medical conditions</label>
-                <textarea
-                  name="medical[1]"
-                  id="medical-conditions"
-                  class="form-control medical-conditions"
-                  placeholder="Please include any medical condition that we need to take note of"
-                ></textarea>
+
+              <!-- UPLOAD IMAGE -->
+              <div class="col-md-4">
+                <div class="col-md-12">
+                  <a href="#" class="pull-right btn-remove removeChild hidden">
+                    <span
+                      class="glyphicon glyphicon-remove"
+                      id="iconRemoveChild"
+                    ></span>
+                  </a>
+                  &nbsp;
+                </div>
+                <div class="text-center">
+                  <label for="photo" class="padding-left-7"
+                    >Recent photo of child</label
+                  >
+                </div>
+                <div class="profile-container text-center">
+                  <CroppieImage
+                    :ref="`croppieRef1`"
+                    :refID="`croppieRef1`"
+                  ></CroppieImage>
+                  <input
+                    class="hidden"
+                    @change="changeImage"
+                    type="file"
+                    ref="fileInput"
+                  />
+                  <a class="btn btn-info btnUpload" @click="onPickFile"
+                    >Upload Image</a
+                  >
+                  <!-- <button
+                  type="button"
+                  @click="resetImage"
+                  class="btn btn-primary"
+                >
+                  Reset Image
+                </button> -->
+                </div>
               </div>
+              <!-- END UPLOAD IMAGE -->
+
+              <div class="col-md-12"><hr class="green-line" /></div>
             </div>
 
-            <!-- UPLOAD IMAGE -->
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <a href="#" class="pull-right btn-remove removeChild">
-                  <span
-                    class="glyphicon glyphicon-remove hidden"
-                    id="iconRemoveChild"
-                  ></span>
-                </a>
-                &nbsp;
-              </div>
-              <div class="text-center">
-                <label for="photo" class="padding-left-7"
-                  >Recent photo of child</label
-                >
-              </div>
-              <div class="profile-container text-center">
-                <CroppieImage
-                  :ref="`croppieRef1`"
-                  :refID="`croppieRef1`"
-                ></CroppieImage>
-                <input
-                  class="hidden"
-                  @change="changeImage"
-                  type="file"
-                  ref="fileInput"
-                />
-                <a class="btn btn-info btnUpload" @click="onPickFile"
-                  >Upload Image</a
-                >
-              </div>
-            </div>
-            <!-- END UPLOAD IMAGE -->
-
-            <div class="col-md-12"><hr class="green-line" /></div>
             <div class="col-md-12 text-center">
               <a class="btn btn-add-more-child" id="addMoreChild"
                 >Add more children</a
@@ -681,6 +585,7 @@
               <hr />
             </div>
           </div>
+          <!-- add more form children if needed -->
           <!---- END Child/Children's Information ---->
           <div class="col-md-10 col-md-offset-1 term">
             <p>
@@ -834,13 +739,11 @@
 if (document.querySelectorAll('[src="/croppie/jquery.min.js"]').length < 1) {
   const pluginJquery = document.createElement("script");
   pluginJquery.setAttribute("src", "/croppie/jquery.min.js");
-  pluginJquery.async = true;
   document.head.appendChild(pluginJquery);
 }
 if (document.querySelectorAll('[src="/croppie/croppie.min.js"]').length < 1) {
   const pluginJqueryCroppie = document.createElement("script");
   pluginJqueryCroppie.setAttribute("src", "/croppie/croppie.min.js");
-  pluginJqueryCroppie.async = true;
   document.head.appendChild(pluginJqueryCroppie);
 }
 import CroppieImage from "./CroppieImage.vue";
@@ -852,9 +755,58 @@ export default {
     return {
       imageUrl: "",
       image: null,
+      dataForm: {
+        parents: [
+          {
+            type: "father",
+            title: "Father/Guardian",
+            family_name: "",
+            first_name: "",
+            mobile_phone: "",
+            office_phone: "",
+            email_address: "",
+          },
+          {
+            type: "mother",
+            title: "Mother/Guardian",
+            family_name: "",
+            first_name: "",
+            mobile_phone: "",
+            office_phone: "",
+            email_address: "",
+          },
+          {
+            type: "authorized_person",
+            title: "Authorized Person (for Afternoon pick ups, if necessary)",
+            family_name: "",
+            first_name: "",
+            mobile_phone: "",
+            office_phone: "",
+            email_address: "",
+          },
+        ],
+        first_contact: "father",
+        pick_drop_address: {
+          block_house_number: "bình",
+          street_name: "hưng",
+          postal_code: "anh trần",
+          unit_number: "duy",
+          name_of_building_condominium: "thịnh",
+        },
+      },
+      // count: 1,
     };
   },
   methods: {
+    // add: function () {
+    //   this.count++;
+    // },
+    // remove: function () {
+    //   this.count--;
+    // },
+    resetImage() {
+      this.$refs["croppieRef1"].refreshCroppie();
+    },
     changeImage(input) {
       const vm = this;
       if (input.target.files && input.target.files[0]) {
