@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div id="schoolBusForm" class="col-md-12">
-      <form role="form" id="registerForm" novalidate="novalidate">
+      <form
+        role="form"
+        id="registerForm"
+        novalidate="novalidate"
+        @submit.prevent="submit"
+      >
         <fieldset>
           <!-- Parent's Information -->
           <legend>
@@ -26,7 +31,24 @@
                     class="form-control"
                     placeholder="eg: Waston"
                     v-model="parent.family_name"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.parents[index].family_name.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.parents[index].family_name.$error
+                    "
+                  >
+                    <span v-if="v$.dataForm.parents[index].family_name.required"
+                      >Please input your family name!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="first-name"
@@ -307,7 +329,7 @@
           </div>
           <!------- END Billing Address -------->
           <!---- Child/Children's Information ---->
-          <legend>
+          <legend id="children_information">
             <p>Child/Children's Information</p>
             <i></i>
           </legend>
@@ -315,13 +337,14 @@
             <!-- add more form children if needed -->
             <div
               class="add-more-form"
-              v-for="(child, index) in dataForm.Children"
+              v-for="(child, index) in dataForm.children"
               :key="index"
             >
               <div class="col-md-8">
                 <div class="pl-13 font-weght-700">
-                  <!-- <li style="list-style-type: decimal">Child</li> -->
-                  <li style="list-style-type: decimal">dsadasd</li>
+                  <li style="list-style-type: none">
+                    {{ index + 1 }}. {{ child.title }}
+                  </li>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="child-family-name"
@@ -332,6 +355,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: Waston"
+                    v-model="child.family_name"
                   />
                 </div>
                 <div class="form-group col-md-12">
@@ -343,6 +367,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: Alice"
+                    v-model="child.given_name"
                   />
                 </div>
                 <div class="form-group col-md-12">
@@ -354,6 +379,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: dd/mm/yyyy"
+                    v-model="child.date_of_birth"
                   />
                 </div>
                 <div class="form-group col-md-12">
@@ -363,6 +389,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: 99985610001"
+                    v-model="child.student_id"
                   />
                 </div>
                 <div class="form-group col-md-12">
@@ -372,6 +399,7 @@
                     type="text"
                     class="form-control"
                     placeholder="eg: G1"
+                    v-model="child.grade"
                   />
                 </div>
                 <div class="form-group col-md-12">
@@ -384,6 +412,7 @@
                       class="form-check-input"
                       name="gender"
                       value="male"
+                      v-model="child.gender"
                     />
                     Male
                   </label>
@@ -393,14 +422,19 @@
                       class="form-check-input"
                       name="gender"
                       value="female"
+                      v-model="child.gender"
                     />
                     Female
                   </label>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="child-date-service">Start date of service </label>
-                  <select id="child-date-service" class="form-control">
-                    <option value="First day of semester">
+                  <select
+                    id="child-date-service"
+                    class="form-control"
+                    v-model="child.start_date_of_service"
+                  >
+                    <option value="first_day_of_semester">
                       First day of semester
                     </option>
                     <option value="data">Choose date</option>
@@ -425,6 +459,7 @@
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
+                        v-model="child.regular_bus_service"
                       />
                       2 Ways
                     </label>
@@ -434,6 +469,7 @@
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
+                        v-model="child.regular_bus_service"
                       />
                       1 Way (AM)
                     </label>
@@ -443,6 +479,7 @@
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
+                        v-model="child.regular_bus_service"
                       />
                       1 Way (PM)
                     </label>
@@ -463,6 +500,7 @@
                         type="radio"
                         class="form-check-input"
                         name="route[2]"
+                        v-model="child.shuttle_service"
                       />
                       2 Ways
                     </label>
@@ -472,6 +510,7 @@
                         type="radio"
                         class="form-check-input"
                         name="route[2]"
+                        v-model="child.shuttle_service"
                       />
                       1 Way (AM)
                     </label>
@@ -481,6 +520,7 @@
                         type="radio"
                         class="form-check-input"
                         name="route[2]"
+                        v-model="child.shuttle_service"
                       />
                       1 Way (PM)
                     </label>
@@ -546,19 +586,27 @@
                     id="medical-conditions"
                     class="form-control medical-conditions"
                     placeholder="Please include any medical condition that we need to take note of"
+                    v-model="child.medical_conditions"
                   ></textarea>
                 </div>
               </div>
-
               <!-- UPLOAD IMAGE -->
+
               <div class="col-md-4">
                 <div class="col-md-12">
-                  <a href="#" class="pull-right btn-remove removeChild hidden">
+                  <button
+                    style="border: 0"
+                    type="button"
+                    class="pull-right btn-remove removeChild"
+                    @click="remove"
+                    v-if="dataForm.children.length > 1"
+                  >
                     <span
                       class="glyphicon glyphicon-remove"
                       id="iconRemoveChild"
+                      ><i class="fas fa-trash-alt"></i
                     ></span>
-                  </a>
+                  </button>
                   &nbsp;
                 </div>
                 <div class="text-center">
@@ -568,16 +616,17 @@
                 </div>
                 <div class="profile-container text-center">
                   <CroppieImage
-                    :ref="`croppieRef1`"
-                    :refID="`croppieRef1`"
+                    :ref="`croppieRef_` + index"
+                    :refID="`croppieRef_` + index"
+                    :image_result="child.image_result"
                   ></CroppieImage>
                   <input
                     class="hidden"
-                    @change="changeImage"
+                    @change="changeImage($event, index)"
                     type="file"
-                    ref="fileInput"
+                    :ref="`fileInput_${index}`"
                   />
-                  <a class="btn btn-info btnUpload" @click="onPickFile"
+                  <a class="btn btn-info btnUpload" @click="onPickFile(index)"
                     >Upload Image</a
                   >
                   <!-- <button
@@ -595,7 +644,7 @@
             </div>
 
             <div class="col-md-12 text-center">
-              <a class="btn btn-add-more-child" id="addMoreChild"
+              <a class="btn btn-add-more-child" id="addMoreChild" @click="add"
                 >Add more children</a
               >
               <hr />
@@ -763,12 +812,22 @@ if (document.querySelectorAll('[src="/croppie/croppie.min.js"]').length < 1) {
   document.head.appendChild(pluginJqueryCroppie);
 }
 import CroppieImage from "./CroppieImage.vue";
+import { required } from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+import $ from "jquery";
+
 export default {
   components: {
     CroppieImage,
   },
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
   data() {
     return {
+      typesubmit: false,
       imageUrl: "",
       image: null,
       dataForm: {
@@ -803,65 +862,173 @@ export default {
         ],
         first_contact: "father",
         pick_drop_address: {
-          block_house_number: "bình",
-          street_name: "hưng",
-          postal_code: "anh trần",
-          unit_number: "duy",
-          name_of_building_condominium: "thịnh",
+          block_house_number: "",
+          street_name: "",
+          postal_code: "",
+          unit_number: "",
+          name_of_building_condominium: "",
         },
         billing_address: {
           same_as_above: false,
           regard_payment: "mother",
-          name_Company: "antking",
-          attention_to: "CVPM Quang Trung",
-          billing_address: "Tòa nhà SBI 305",
-          email_address: "antking@gmail.com",
+          name_Company: "",
+          attention_to: "",
+          billing_address: "",
+          email_address: "",
         },
-        Children: [
+        children: [
           {
             title: "Child",
-            family_name: "Ngô",
-            given_name: "Dương",
-            date_of_birth: "18-03-2000",
-            Student_id: "2001180224",
-            grade: "11",
+            family_name: "",
+            given_name: "",
+            date_of_birth: "",
+            student_id: "",
+            grade: "",
             gender: "male",
-            start_date: ["23-03-2022"],
+            start_date_of_service: "first_day_of_semester",
+            start_date: "",
             regular_bus_service: "two-way",
             shuttle_service: "two-way",
-            medical_conditions: "hello mấy cưng. Cỗ dũ cho anh nào!",
-            image_result: "",
+            medical_conditions: "",
+            image_result: null,
           },
         ],
+        agree_service: false,
+        read_understood: false,
       },
-      // count: 1,
+    };
+  },
+  validations() {
+    let ValidateDataForm = {
+      parents: [],
+      first_contact: {
+        required,
+      },
+      pick_drop_address: {
+        block_house_number: {
+          required,
+        },
+      },
+      billing_address: {},
+      children: [],
+      agree_service: {
+        required,
+      },
+      read_understood: {
+        required,
+      },
+    };
+    if (this.dataForm) {
+      if (this.dataForm.parents) {
+        Object.entries(this.dataForm.parents).forEach(([key, parent]) => {
+          let valid = {
+            family_name: {},
+            first_name: {},
+            mobile_phone: {},
+            office_phone: {},
+            email_address: {},
+          };
+          if (this.dataForm.first_contact == parent.type) {
+            valid = {
+              family_name: {
+                required,
+              },
+              first_name: {
+                required,
+              },
+              mobile_phone: {
+                required,
+              },
+              office_phone: {
+                required,
+              },
+              email_address: {
+                required,
+              },
+            };
+          }
+          ValidateDataForm.parents[key] = valid;
+        });
+      }
+      if (this.dataForm.children) {
+        Object.entries(this.dataForm.children).forEach(([key, child]) => {
+          child = {
+            family_name: {
+              required,
+            },
+            given_name: {
+              required,
+            },
+            date_of_birth: {
+              required,
+            },
+            student_id: {
+              required,
+            },
+            grade: {
+              required,
+            },
+            start_date: {
+              required,
+            },
+            medical_conditions: {
+              required,
+            },
+            image_result: {
+              required,
+            },
+          };
+          ValidateDataForm.children[key] = child;
+        });
+      }
+    }
+    return {
+      dataForm: ValidateDataForm,
     };
   },
   methods: {
-    // add: function () {
-    //   this.count++;
-    // },
-    // remove: function () {
-    //   this.count--;
-    // },
-    resetImage() {
-      this.$refs["croppieRef1"].refreshCroppie();
+    add: function () {
+      this.dataForm.children.push({
+        title: "Child",
+        family_name: "",
+        given_name: "",
+        date_of_birth: "",
+        student_id: "",
+        grade: "",
+        gender: "male",
+        start_date_of_service: "first_day_of_semester",
+        start_date: "",
+        regular_bus_service: "two-way",
+        shuttle_service: "two-way",
+        medical_conditions: "",
+        image_result: null,
+      });
     },
-    changeImage(input) {
+    remove: function (index) {
+      this.dataForm.children.splice(index, 1);
+      $("#children_information")[0].scrollIntoView({
+        behavior: "smooth",
+      });
+      // window.scrollBy(0, -100); màn hình dừng tại vị trí?
+    },
+    resetImage(index) {
+      this.$refs["croppieRef_" + index][0].refreshCroppie();
+    },
+    changeImage(input, index) {
       const vm = this;
       if (input.target.files && input.target.files[0]) {
         let reader = new FileReader();
         reader.readAsDataURL(input.target.files[0]);
         reader.onload = function (e) {
           let rawImg = e.target.result;
-          vm.$refs["croppieRef1"].bindCroppie(
+          vm.$refs["croppieRef_" + index][0].bindCroppie(
             JSON.parse(JSON.stringify(rawImg))
           );
         };
       }
     },
-    onPickFile() {
-      this.$refs.fileInput.click();
+    onPickFile(index) {
+      this.$refs[`fileInput_${index}`][0].click();
     },
     onFilePicked(event) {
       const files = event.target.files;
@@ -875,6 +1042,20 @@ export default {
       });
       fileReader.readAsDataURL(files[0]);
       this.image = files[0];
+    },
+    submit() {
+      this.typesubmit = true;
+      this.v$.$validate();
+      if (!this.v$.$invalid) {
+        this.dataForm.children.map((student, index) => {
+          student.image_result = this.$refs[`croppieRef_${index}`].imageSrc;
+        });
+      } else {
+        setTimeout(() => {
+          $(".is-invalid")[0].scrollIntoView();
+          window.scrollBy(0, -100);
+        }, 200);
+      }
     },
   },
 };
@@ -1273,4 +1454,15 @@ background: #ccc;
   height: 0 !important;
 }
 /* end Croppie test */
+
+.btn-remove {
+  color: #b30000;
+  font-size: medium;
+  position: absolute;
+  right: 15px;
+}
+
+.btn-remove:hover {
+  color: #ff0000;
+}
 </style>

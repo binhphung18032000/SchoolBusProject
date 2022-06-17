@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  props: ["refID", "inputImage"],
+  props: ["refID", "inputImage", "image_result"],
   mounted() {
     const vm = this;
 
@@ -19,6 +19,7 @@ export default {
       .addEventListener("update", function (ev) {
         vm.resultImage();
       });
+    this.imageSrc = this.image_result ?? null;
   },
   data() {
     return {
@@ -42,7 +43,7 @@ export default {
   },
   methods: {
     resultImage() {
-      const vm = this;
+      let vm = this;
       let options = {
         size: { width: 480, height: 480 },
         format: "png",
