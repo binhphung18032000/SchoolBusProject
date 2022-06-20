@@ -943,7 +943,7 @@
                     style="border: 0; background: none"
                     type="button"
                     class="pull-right btn-remove removeChild"
-                    @click="remove"
+                    @click="remove(index)"
                     v-if="dataForm.children.length > 1"
                   >
                     <span
@@ -1451,21 +1451,20 @@ export default {
     remove: function (index) {
       const vm = this;
       this.dataForm.children.splice(index, 1);
-      console.log(this.dataForm.children)
+      this.$forceUpdate();
+      console.log(this.dataForm.children);
       $("html,body").animate({ scrollTop: 1400 }, "slow");
-      setTimeout(()=> {
+      setTimeout(() => {
         Object.entries(this.dataForm.children).forEach(([key, child]) => {
-        console.log(child)
-        console.log(key)
-        if (child.rawImg) {
-          vm.$refs["croppieRef_" + child.ref_id][0].bindCroppie(
-            JSON.parse(JSON.stringify(child.rawImg))
-          );
-        } else {
-          vm.$refs["croppieRef_" + child.ref_id][0].refreshCroppie();
-        }
-      });
-      }, 500)
+          if (child.rawImg) {
+            vm.$refs["croppieRef_" + child.ref_id][0].bindCroppie(
+              JSON.parse(JSON.stringify(child.rawImg))
+            );
+          } else {
+            vm.$refs["croppieRef_" + child.ref_id][0].refreshCroppie();
+          }
+        });
+      }, 200);
     },
     resetImage(index) {
       this.$refs["croppieRef_" + index][0].refreshCroppie();

@@ -59,7 +59,6 @@ export default {
     bindCroppie(rawImg, zoom = null) {
       const vm = this;
       vm.hasCroppie = true;
-      console.log(rawImg)
       this.croppie_obj
         .bind({
           url: rawImg,
