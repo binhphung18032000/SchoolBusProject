@@ -33,6 +33,7 @@
                     v-model="parent.family_name"
                     :class="
                       typesubmit &&
+                      v$.dataForm.parents[index] &&
                       v$.dataForm.parents[index].family_name.$error
                         ? 'is-invalid'
                         : ''
@@ -42,10 +43,15 @@
                     class="invalid-feedback"
                     v-if="
                       typesubmit &&
+                      v$.dataForm.parents[index] &&
                       v$.dataForm.parents[index].family_name.$error
                     "
                   >
-                    <span v-if="v$.dataForm.parents[index].family_name.required"
+                    <span
+                      v-if="
+                        v$.dataForm.parents[index] &&
+                        v$.dataForm.parents[index].family_name.required
+                      "
                       >Please input family name!</span
                     >
                   </div>
@@ -61,7 +67,9 @@
                     placeholder="eg: John"
                     v-model="parent.first_name"
                     :class="
-                      typesubmit && v$.dataForm.parents[index].first_name.$error
+                      typesubmit &&
+                      v$.dataForm.parents[index] &&
+                      v$.dataForm.parents[index].first_name.$error
                         ? 'is-invalid'
                         : ''
                     "
@@ -69,10 +77,16 @@
                   <div
                     class="invalid-feedback"
                     v-if="
-                      typesubmit && v$.dataForm.parents[index].first_name.$error
+                      typesubmit &&
+                      v$.dataForm.parents[index] &&
+                      v$.dataForm.parents[index].first_name.$error
                     "
                   >
-                    <span v-if="v$.dataForm.parents[index].first_name.required"
+                    <span
+                      v-if="
+                        v$.dataForm.parents[index] &&
+                        v$.dataForm.parents[index].first_name.required
+                      "
                       >Please input first name!</span
                     >
                   </div>
@@ -90,6 +104,7 @@
                     v-model="parent.mobile_phone"
                     :class="
                       typesubmit &&
+                      v$.dataForm.parents[index] &&
                       v$.dataForm.parents[index].mobile_phone.$error
                         ? 'is-invalid'
                         : ''
@@ -99,11 +114,15 @@
                     class="invalid-feedback"
                     v-if="
                       typesubmit &&
+                      v$.dataForm.parents[index] &&
                       v$.dataForm.parents[index].mobile_phone.$error
                     "
                   >
                     <span
-                      v-if="v$.dataForm.parents[index].mobile_phone.required"
+                      v-if="
+                        v$.dataForm.parents[index] &&
+                        v$.dataForm.parents[index].mobile_phone.required
+                      "
                       >Please input mobile phone!</span
                     >
                   </div>
@@ -132,6 +151,7 @@
                     v-model="parent.email_address"
                     :class="
                       typesubmit &&
+                      v$.dataForm.parents[index] &&
                       v$.dataForm.parents[index].email_address.$error
                         ? 'is-invalid'
                         : ''
@@ -141,11 +161,15 @@
                     class="invalid-feedback"
                     v-if="
                       typesubmit &&
+                      v$.dataForm.parents[index] &&
                       v$.dataForm.parents[index].email_address.$error
                     "
                   >
                     <span
-                      v-if="v$.dataForm.parents[index].email_address.required"
+                      v-if="
+                        v$.dataForm.parents[index] &&
+                        v$.dataForm.parents[index].email_address.required
+                      "
                       >Please input email address!</span
                     >
                   </div>
@@ -362,6 +386,7 @@
                       class="form-check-input"
                       name="billing-pick"
                       v-model="dataForm.billing_address.regard_payment"
+                      @click="dataForm.billing_address.same_as_above = true"
                     />
                     Father
                   </label>
@@ -372,6 +397,7 @@
                       class="form-check-input"
                       name="billing-pick"
                       v-model="dataForm.billing_address.regard_payment"
+                      @click="dataForm.billing_address.same_as_above = true"
                     />
                     Mother</label
                   >
@@ -382,6 +408,7 @@
                       class="form-check-input"
                       name="billing-pick"
                       v-model="dataForm.billing_address.regard_payment"
+                      @click="dataForm.billing_address.same_as_above = false"
                     />
                     Details below</label
                   >
@@ -400,6 +427,7 @@
                   class="form-control"
                   placeholder="Please fill in full name. eg: Tree Pte Ltd"
                   v-model="dataForm.billing_address.name_company"
+                  :disabled="dataForm.billing_address.same_as_above"
                   :class="
                     typesubmit &&
                     v$.dataForm.billing_address.name_company.$error
@@ -429,6 +457,7 @@
                   class="form-control"
                   placeholder="eg: John"
                   v-model="dataForm.billing_address.attention_to"
+                  :disabled="dataForm.billing_address.same_as_above"
                   :class="
                     typesubmit &&
                     v$.dataForm.billing_address.attention_to.$error
@@ -460,6 +489,7 @@
                   class="form-control"
                   placeholder="Please fill in full address. eg: 3 Orchard Road, 01-15 Orchard Tower, Singapore 123456"
                   v-model="dataForm.billing_address.billing_address_input"
+                  :disabled="dataForm.billing_address.same_as_above"
                   :class="
                     typesubmit &&
                     v$.dataForm.billing_address.billing_address_input.$error
@@ -492,6 +522,7 @@
                   class="form-control"
                   placeholder="eg: example@gmail.com"
                   v-model="dataForm.billing_address.email_address"
+                  :disabled="dataForm.billing_address.same_as_above"
                   :class="
                     typesubmit &&
                     v$.dataForm.billing_address.email_address.$error
@@ -525,7 +556,7 @@
             <div
               class="add-more-form"
               v-for="(child, index) in dataForm.children"
-              :key="index"
+              :key="child.ref_id"
             >
               <div class="col-md-8">
                 <div class="pl-13 font-weght-700">
@@ -596,7 +627,7 @@
                   <label for="child-birth"
                     >Date of Birth <span class="label-required">*</span></label
                   >
-                  <input
+                  <!-- <input
                     id="child-birth"
                     type="text"
                     class="form-control"
@@ -608,7 +639,19 @@
                         ? 'is-invalid'
                         : ''
                     "
-                  />
+                  /> -->
+                  <DatePicker
+                    v-model="child.date_of_birth"
+                    :inputFormat="format_date_picker"
+                    class="form-control"
+                    placeholder="eg: dd/mm/yyyy"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.children[index].date_of_birth.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  ></DatePicker>
                   <div
                     class="invalid-feedback"
                     v-if="
@@ -677,15 +720,24 @@
                     <option value="first_day_of_semester">
                       First day of semester
                     </option>
-                    <option value="data">Choose date</option>
+                    <option value="choose_date">Choose date</option>
                   </select>
                 </div>
-                <div class="form-group col-md-12">
-                  <input
+                <div
+                  class="form-group col-md-12"
+                  v-if="child.start_date_of_service == 'choose_date'"
+                >
+                  <!-- <input
                     type="text"
                     class="form-control"
                     placeholder="eg: dd/mm/yyyy"
-                  />
+                  /> -->
+                  <DatePicker
+                    :inputFormat="format_date_picker"
+                    v-model="child.start_date"
+                    class="form-control"
+                    placeholder="eg: dd/mm/yyyy"
+                  ></DatePicker>
                 </div>
                 <div class="form-group col-md-12">
                   <strong class="d-block">For Regular Bus Service:</strong>
@@ -802,7 +854,7 @@
                     </label>
                   </ul>
                   <div
-                    class="invalid-feedback"
+                    class="invalid-feedback message_block"
                     v-if="
                       typesubmit &&
                       v$.dataForm.children[index].regular_bus_service.$error &&
@@ -815,7 +867,7 @@
                           .required &&
                         v$.dataForm.children[index].shuttle_service.required
                       "
-                      >Please input family name!</span
+                      >Please choose route!</span
                     >
                   </div>
                 </div>
@@ -908,18 +960,21 @@
                   >
                 </div>
                 <div class="profile-container text-center">
+                  {{ child.ref_id }}
                   <CroppieImage
-                    :ref="`croppieRef_` + index"
-                    :refID="`croppieRef_` + index"
+                    :ref="`croppieRef_` + child.ref_id"
+                    :refID="`croppieRef_` + child.ref_id"
                     :image_result="child.image_result"
                   ></CroppieImage>
                   <input
                     class="hidden"
-                    @change="changeImage($event, index)"
+                    @change="changeImage($event, child.ref_id, index)"
                     type="file"
-                    :ref="`fileInput_${index}`"
+                    :ref="`fileInput_${child.ref_id}`"
                   />
-                  <a class="btn btn-info btnUpload" @click="onPickFile(index)"
+                  <a
+                    class="btn btn-info btnUpload"
+                    @click="onPickFile(child.ref_id)"
                     >Upload Image</a
                   >
                   <!-- <button
@@ -1018,7 +1073,12 @@
                     class="form-check-input"
                     name="agreeTerm"
                     id="agreeTerm"
-                    value="1"
+                    v-model="dataForm.agree_service"
+                    :class="
+                      typesubmit && v$.dataForm.agree_service.$error
+                        ? 'is-invalid binh'
+                        : ''
+                    "
                   />
                   I agree to the
                   <a
@@ -1028,6 +1088,15 @@
                   >
                     terms of service</a
                   >
+                  <div
+                    class="invalid-feedback"
+                    v-if="typesubmit && v$.dataForm.agree_service.$error"
+                  >
+                    <span v-if="v$.dataForm.agree_service.required"
+                      >Please agree Terms and Conditions & Bus Regulations
+                      before submit!</span
+                    >
+                  </div>
                 </label>
               </div>
             </ul>
@@ -1044,7 +1113,12 @@
                     class="form-check-input"
                     name="agreePDPA"
                     id="agreePDPA"
-                    value="1"
+                    v-model="dataForm.read_understood"
+                    :class="
+                      typesubmit && v$.dataForm.read_understood.$error
+                        ? 'is-invalid binh'
+                        : ''
+                    "
                   />
                   I acknowledge that I have read and understood the
                   <a
@@ -1055,6 +1129,15 @@
                   >, and consent to the collection, use and disclosure of my
                   personal data by Tong Tar Transport Service Pte Ltd for the
                   purposes set out in the Notice.
+                  <div
+                    class="invalid-feedback"
+                    v-if="typesubmit && v$.dataForm.read_understood.$error"
+                  >
+                    <span v-if="v$.dataForm.read_understood.required"
+                      >Please read and confirm the Data Protection Notice before
+                      submit!</span
+                    >
+                  </div>
                 </label>
               </div>
             </ul>
@@ -1108,10 +1191,12 @@ import CroppieImage from "./CroppieImage.vue";
 import { required } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import $ from "jquery";
+import DatePicker from "vue3-datepicker";
 
 export default {
   components: {
     CroppieImage,
+    DatePicker,
   },
   setup() {
     return {
@@ -1120,6 +1205,7 @@ export default {
   },
   data() {
     return {
+      format_date_picker: "dd/MM/yyyy",
       typesubmit: false,
       imageUrl: "",
       image: null,
@@ -1162,7 +1248,7 @@ export default {
           name_of_building_condominium: "",
         },
         billing_address: {
-          same_as_above: false,
+          same_as_above: true,
           regard_payment: "father",
           name_company: "",
           attention_to: "",
@@ -1171,19 +1257,21 @@ export default {
         },
         children: [
           {
+            ref_id: Math.random().toString(36).substring(2, 15),
             title: "Child",
             family_name: "",
             given_name: "",
-            date_of_birth: "",
+            date_of_birth: null,
             student_id: "",
             grade: "",
             gender: "male",
             start_date_of_service: "first_day_of_semester",
-            start_date: "",
+            start_date: null,
             regular_bus_service: "",
             shuttle_service: "",
             medical_conditions: "",
             image_result: null,
+            rawImg: null,
           },
         ],
         agree_service: false,
@@ -1192,6 +1280,11 @@ export default {
     };
   },
   validations() {
+    let requiredParent = [
+      this.dataForm.first_contact,
+      this.dataForm.billing_address.regard_payment,
+    ];
+
     let ValidateDataForm = {
       parents: [],
       first_contact: {
@@ -1207,14 +1300,28 @@ export default {
         postal_code: {
           required,
         },
-        // unit_number: {
-        //   required,
-        // },
-        // name_building_condominium: {
-        //   required,
-        // },
       },
       billing_address: {
+        name_company: {},
+        attention_to: {},
+        billing_address_input: {},
+        email_address: {},
+      },
+      children: [],
+      agree_service: {
+        required(val) {
+          return val;
+        },
+      },
+      read_understood: {
+        required(val) {
+          return val;
+        },
+      },
+    };
+
+    if (!this.dataForm.billing_address.same_as_above) {
+      ValidateDataForm.billing_address = {
         name_company: {
           required,
         },
@@ -1227,15 +1334,8 @@ export default {
         email_address: {
           required,
         },
-      },
-      children: [],
-      agree_service: {
-        required,
-      },
-      read_understood: {
-        required,
-      },
-    };
+      };
+    }
     if (this.dataForm) {
       if (this.dataForm.parents) {
         Object.entries(this.dataForm.parents).forEach(([key, parent]) => {
@@ -1246,7 +1346,7 @@ export default {
             office_phone: {},
             email_address: {},
           };
-          if (this.dataForm.first_contact == parent.type) {
+          if (requiredParent.includes(parent.type)) {
             valid = {
               family_name: {
                 required,
@@ -1265,6 +1365,25 @@ export default {
               },
             };
           }
+          // if (this.dataForm.first_contact == parent.type) {
+          //   valid = {
+          //     family_name: {
+          //       required,
+          //     },
+          //     first_name: {
+          //       required,
+          //     },
+          //     mobile_phone: {
+          //       required,
+          //     },
+          //     office_phone: {
+          //       required,
+          //     },
+          //     email_address: {
+          //       required,
+          //     },
+          //   };
+          // }
           ValidateDataForm.parents[key] = valid;
         });
       }
@@ -1313,6 +1432,7 @@ export default {
   methods: {
     add: function () {
       this.dataForm.children.push({
+        ref_id: Math.random().toString(36).substring(2, 15),
         title: "Child",
         family_name: "",
         given_name: "",
@@ -1329,24 +1449,41 @@ export default {
       });
     },
     remove: function (index) {
+      const vm = this;
       this.dataForm.children.splice(index, 1);
+      console.log(this.dataForm.children)
       $("html,body").animate({ scrollTop: 1400 }, "slow");
+      setTimeout(()=> {
+        Object.entries(this.dataForm.children).forEach(([key, child]) => {
+        console.log(child)
+        console.log(key)
+        if (child.rawImg) {
+          vm.$refs["croppieRef_" + child.ref_id][0].bindCroppie(
+            JSON.parse(JSON.stringify(child.rawImg))
+          );
+        } else {
+          vm.$refs["croppieRef_" + child.ref_id][0].refreshCroppie();
+        }
+      });
+      }, 500)
     },
     resetImage(index) {
       this.$refs["croppieRef_" + index][0].refreshCroppie();
     },
-    changeImage(input, index) {
+    changeImage(input, ref_id, index) {
       const vm = this;
       if (input.target.files && input.target.files[0]) {
         let reader = new FileReader();
         reader.readAsDataURL(input.target.files[0]);
         reader.onload = function (e) {
           let rawImg = e.target.result;
-          vm.$refs["croppieRef_" + index][0].bindCroppie(
+          vm.dataForm.children[index].rawImg = rawImg;
+          vm.$refs["croppieRef_" + ref_id][0].bindCroppie(
             JSON.parse(JSON.stringify(rawImg))
           );
         };
       }
+      console.log(vm.dataForm.children);
     },
     onPickFile(index) {
       this.$refs[`fileInput_${index}`][0].click();
@@ -1377,6 +1514,9 @@ export default {
           window.scrollBy(0, -100);
         }, 200);
       }
+      console.log(this.dataForm.parents[0].family_name);
+      // this.dataForm.parents.family_name =
+      //   e.target.dataForm.parents.family_name.value;
     },
   },
 };

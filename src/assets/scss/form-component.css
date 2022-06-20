@@ -1,263 +1,263 @@
 #schoolBusForm {
-    font-size: 14px;
-    color: #333;
+  font-size: 14px;
+  color: #333;
 }
 
 p {
-    margin: 0 0 10px !important;
+  margin: 0 0 10px !important;
 }
 /* Responsive */
 @media (min-width: 992px) {
-    .col-md-1,
-    .col-md-10,
-    .col-md-11,
-    .col-md-12,
-    .col-md-2,
-    .col-md-3,
-    .col-md-4,
-    .col-md-5,
-    .col-md-6,
-    .col-md-7,
-    .col-md-8,
-    .col-md-9 {
-        float: left;
-    }
+  .col-md-1,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9 {
+    float: left;
+  }
 }
 
 /* Responsive */
 legend {
-    position: relative;
-    margin-bottom: 0 !important;
-    letter-spacing: 0.25px;
-    background: #006d29;
-    overflow: hidden;
-    height: 50px;
-    border-bottom: 0 !important;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+  position: relative;
+  margin-bottom: 0 !important;
+  letter-spacing: 0.25px;
+  background: #006d29;
+  overflow: hidden;
+  height: 50px;
+  border-bottom: 0 !important;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
 
 legend p {
-    font-size: 20px;
-    padding-left: 12px;
-    margin: 0;
-    color: #ffffff;
-    padding-top: 10px;
+  font-size: 20px;
+  padding-left: 12px;
+  margin: 0;
+  color: #ffffff;
+  padding-top: 10px;
 }
 
 legend i {
-    background: url(../../assets/images/icon-car.png) no-repeat left;
-    display: inline-block;
-    width: 54px;
-    height: 55px;
-    position: absolute;
-    top: -5px;
-    right: 6px;
+  background: url(../../assets/images/icon-car.png) no-repeat left;
+  display: inline-block;
+  width: 54px;
+  height: 55px;
+  position: absolute;
+  top: -5px;
+  right: 6px;
 }
 
 .wp-content {
-    border: 1px solid #006d29;
-    margin-bottom: 15px;
-    padding-top: 20px;
+  border: 1px solid #006d29;
+  margin-bottom: 15px;
+  padding-top: 20px;
 }
 
 .pl-15 {
-    padding-left: 30px;
+  padding-left: 30px;
 }
 
 label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: 700;
-    font-size: 14px;
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .label-required {
-    color: #ed7878;
+  color: #ed7878;
 }
 
 .gender {
-    padding-left: 30px;
+  padding-left: 30px;
 }
 
 .shuttle-table {
-    border: solid 1px;
-    width: 100%;
-    font-size: 14px;
-    line-height: 1.5;
-    text-align: center;
+  border: solid 1px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .shuttle-table tr th,
 .shuttle-table tr td {
-    padding-top: 5px;
-    padding-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .shuttle-table tr td {
-    border: 1px solid;
+  border: 1px solid;
 }
 
 .shuttle-thead-table {
-    background-color: #e2e2e2;
-    color: #000000;
+  background-color: #e2e2e2;
+  color: #000000;
 }
 
 .medical-conditions {
-    min-height: 70px;
+  min-height: 70px;
 }
 
 .profile-container {
-    position: relative;
+  position: relative;
 }
 
 .profile-container:hover .image {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .profile-container:hover .middle {
-    opacity: 1;
+  opacity: 1;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .term {
-    text-align: justify;
+  text-align: justify;
 }
 
 .col-md-offset-1 {
-    margin-left: 8.33333333%;
+  margin-left: 8.33333333%;
 }
 
 .text-green {
-    color: #006d29;
+  color: #006d29;
 }
 
 .col-md-offset-2 {
-    margin-left: 16.66666667%;
+  margin-left: 16.66666667%;
 }
 
 .btn-add-more-child {
-    width: 200px;
-    background-color: #3c3e3c;
-    color: #ffffff !important;
-    font-weight: 700 !important;
+  width: 200px;
+  background-color: #3c3e3c;
+  color: #ffffff !important;
+  font-weight: 700 !important;
 }
 .btn-add-more-child:hover {
-    width: 200px;
-    background-color: #006d29;
-    color: #ffffff !important;
-    font-weight: 700;
+  width: 200px;
+  background-color: #006d29;
+  color: #ffffff !important;
+  font-weight: 700;
 }
 
 .copyright {
-    font-size: 11px;
-    padding-top: 20px;
-    margin-bottom: 0px;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 11px;
+  padding-top: 20px;
+  margin-bottom: 0px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .btn-info {
-    color: #fff !important;
-    background-color: #5bc0de !important;
-    border-color: #46b8da !important;
+  color: #fff !important;
+  background-color: #5bc0de !important;
+  border-color: #46b8da !important;
 }
 
 .btn-info:hover {
-    color: #fff !important;
-    background-color: #31b0d5 !important;
-    border-color: #269abc !important;
+  color: #fff !important;
+  background-color: #31b0d5 !important;
+  border-color: #269abc !important;
 }
 
 .upload-demo {
-    height: 330px !important;
+  height: 330px !important;
 }
 .upload-demo .cr-boundary {
-    max-width: 300px;
-    width: 100%;
+  max-width: 300px;
+  width: 100%;
 }
 .old_profile_img {
-    min-width: 200px;
-    max-width: 20px;
-    padding-bottom: 20px;
+  min-width: 200px;
+  max-width: 20px;
+  padding-bottom: 20px;
 }
 
 /*==================================== Croppie test */
 .croppie-container {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .croppie-container .cr-image {
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: 0 0;
-    max-height: none;
-    max-width: none;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  max-height: none;
+  max-width: none;
 }
 
 .croppie-container .cr-boundary {
-    position: relative;
-    overflow: hidden;
-    margin: 0 auto;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .croppie-container .cr-viewport {
-    position: absolute;
-    border: 2px solid #fff;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    box-shadow: 0 0 2000px 2000px rgba(0, 0, 0, 0.5);
-    z-index: 0;
+  position: absolute;
+  border: 2px solid #fff;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  box-shadow: 0 0 2000px 2000px rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
 
 .croppie-container .cr-original-image {
-    display: none;
+  display: none;
 }
 
 .croppie-container .cr-vp-circle {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .croppie-container .cr-overlay {
-    z-index: 1;
-    position: absolute;
-    cursor: move;
+  z-index: 1;
+  position: absolute;
+  cursor: move;
 }
 
 .croppie-container .cr-slider-wrap {
-    width: 75%;
-    margin: 15px auto;
-    text-align: center;
+  width: 75%;
+  margin: 15px auto;
+  text-align: center;
 }
 
 .croppie-result {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .croppie-result img {
-    position: absolute;
+  position: absolute;
 }
 
 .croppie-container .cr-image,
 .croppie-container .cr-overlay,
 .croppie-container .cr-viewport {
-    -webkit-transform: translateZ(0);
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /*************************************/
@@ -267,34 +267,34 @@ label {
 /*************************************/
 
 .cr-slider {
-    -webkit-appearance: none;
-    /*removes default webkit styles*/
-    /*border: 1px solid white; */ /*fix for FF unable to apply focus style bug */
-    width: 300px;
-    /*required for proper track sizing in FF*/
-    max-width: 100%;
+  -webkit-appearance: none;
+  /*removes default webkit styles*/
+  /*border: 1px solid white; */ /*fix for FF unable to apply focus style bug */
+  width: 300px;
+  /*required for proper track sizing in FF*/
+  max-width: 100%;
 }
 
 .cr-slider::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 3px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 0;
-    border-radius: 3px;
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  border-radius: 3px;
 }
 
 .cr-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #ddd;
-    margin-top: -6px;
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ddd;
+  margin-top: -6px;
 }
 
 .cr-slider:focus {
-    outline: none;
+  outline: none;
 }
 /*
   .cr-slider:focus::-webkit-slider-runnable-track {
@@ -303,58 +303,58 @@ label {
   */
 
 .cr-slider::-moz-range-track {
-    width: 100%;
-    height: 3px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 0;
-    border-radius: 3px;
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  border-radius: 3px;
 }
 
 .cr-slider::-moz-range-thumb {
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #ddd;
-    margin-top: -6px;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ddd;
+  margin-top: -6px;
 }
 
 /*hide the outline behind the border*/
 .cr-slider:-moz-focusring {
-    outline: 1px solid white;
-    outline-offset: -1px;
+  outline: 1px solid white;
+  outline-offset: -1px;
 }
 
 .cr-slider::-ms-track {
-    width: 100%;
-    height: 5px;
-    background: transparent;
-    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
-    border-color: transparent; /*leave room for the larger thumb to overflow with a transparent border */
-    border-width: 6px 0;
-    color: transparent; /*remove default tick marks*/
+  width: 100%;
+  height: 5px;
+  background: transparent;
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  border-color: transparent; /*leave room for the larger thumb to overflow with a transparent border */
+  border-width: 6px 0;
+  color: transparent; /*remove default tick marks*/
 }
 .cr-slider::-ms-fill-lower {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 .cr-slider::-ms-fill-upper {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 .cr-slider::-ms-thumb {
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #ddd;
-    margin-top: 1px;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ddd;
+  margin-top: 1px;
 }
 .cr-slider:focus::-ms-fill-lower {
-    background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 .cr-slider:focus::-ms-fill-upper {
-    background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 /*******************************************/
 
@@ -362,41 +362,58 @@ label {
 /* Rotation Tools */
 /***********************************/
 .cr-rotate-controls {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    z-index: 1;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  z-index: 1;
 }
 .cr-rotate-controls button {
-    border: 0;
-    background: none;
+  border: 0;
+  background: none;
 }
 .cr-rotate-controls i:before {
-    display: inline-block;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 22px;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 22px;
 }
 .cr-rotate-l i:before {
-    content: "â†º";
+  content: "â†º";
 }
 .cr-rotate-r i:before {
-    content: "â†»";
+  content: "â†»";
 }
 
 [src=""] {
-    width: 0 !important;
-    height: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 /* end Croppie test */
 
 .btn-remove {
-    color: #b30000;
-    font-size: medium;
-    position: absolute;
-    right: 15px;
+  color: #b30000;
+  font-size: medium;
+  position: absolute;
+  right: 15px;
 }
 
 .btn-remove:hover {
-    color: #ff0000;
+  color: #ff0000;
+}
+
+.is-invalid.binh ~ .invalid-feedback {
+  display: block !important;
+}
+
+.form-control[disabled],
+fieldset[disabled] .form-control {
+  cursor: not-allowed;
+}
+
+.invalid-feedback.message_block {
+  display: block;
+}
+
+.form-control[readonly] {
+  background-color: unset !important;
 }
