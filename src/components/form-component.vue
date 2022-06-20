@@ -172,6 +172,14 @@
                       "
                       >Please input email address!</span
                     >
+                    <span
+                      v-if="
+                        v$.dataForm.parents[index] &&
+                        !v$.dataForm.parents[index].email_address.required &&
+                        v$.dataForm.parents[index].email_address.email
+                      "
+                      >Email address is invalid!</span
+                    >
                   </div>
                 </div>
               </div>
@@ -960,7 +968,7 @@
                   >
                 </div>
                 <div class="profile-container text-center">
-                  {{ child.ref_id }}
+                  <!-- {{ child.ref_id }} -->
                   <CroppieImage
                     :ref="`croppieRef_` + child.ref_id"
                     :refID="`croppieRef_` + child.ref_id"
@@ -1188,7 +1196,7 @@ if (document.querySelectorAll('[src="/croppie/croppie.min.js"]').length < 1) {
   document.head.appendChild(pluginJqueryCroppie);
 }
 import CroppieImage from "./CroppieImage.vue";
-import { required } from "@vuelidate/validators";
+import { required, email } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import $ from "jquery";
 import DatePicker from "vue3-datepicker";
@@ -1362,6 +1370,7 @@ export default {
               },
               email_address: {
                 required,
+                email,
               },
             };
           }
