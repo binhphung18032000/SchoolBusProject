@@ -19,7 +19,7 @@
               v-for="(parent, index) in dataForm.parents"
               :key="index"
             >
-              <label for="">{{ index + 1 }}.{{ parent.title }}</label>
+              <label for="">{{ index + 1 }}. {{ parent.title }}</label>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="family-name"
@@ -46,7 +46,7 @@
                     "
                   >
                     <span v-if="v$.dataForm.parents[index].family_name.required"
-                      >Please input your family name!</span
+                      >Please input family name!</span
                     >
                   </div>
                 </div>
@@ -60,7 +60,22 @@
                     class="form-control"
                     placeholder="eg: John"
                     v-model="parent.first_name"
+                    :class="
+                      typesubmit && v$.dataForm.parents[index].first_name.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit && v$.dataForm.parents[index].first_name.$error
+                    "
+                  >
+                    <span v-if="v$.dataForm.parents[index].first_name.required"
+                      >Please input first name!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="mobile-phone"
@@ -73,7 +88,25 @@
                     class="form-control"
                     placeholder="eg: 9876 5883"
                     v-model="parent.mobile_phone"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.parents[index].mobile_phone.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.parents[index].mobile_phone.$error
+                    "
+                  >
+                    <span
+                      v-if="v$.dataForm.parents[index].mobile_phone.required"
+                      >Please input mobile phone!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="office-phone"
@@ -97,7 +130,25 @@
                     class="form-control"
                     placeholder="eg: example@gmail.com"
                     v-model="parent.email_address"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.parents[index].email_address.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.parents[index].email_address.$error
+                    "
+                  >
+                    <span
+                      v-if="v$.dataForm.parents[index].email_address.required"
+                      >Please input email address!</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -131,7 +182,7 @@
                     >
                     <label class="pl-15"
                       ><input
-                        value="guardian"
+                        value="authorized_person"
                         type="radio"
                         class="form-check-input"
                         name="parent-pick"
@@ -166,7 +217,27 @@
                   class="form-control"
                   placeholder="eg: 123 / 123B"
                   v-model="dataForm.pick_drop_address.block_house_number"
+                  :class="
+                    typesubmit &&
+                    v$.dataForm.pick_drop_address.block_house_number.$error
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
+                <div
+                  class="invalid-feedback"
+                  v-if="
+                    typesubmit &&
+                    v$.dataForm.pick_drop_address.block_house_number.$error
+                  "
+                >
+                  <span
+                    v-if="
+                      v$.dataForm.pick_drop_address.block_house_number.required
+                    "
+                    >Please input block/ house number!</span
+                  >
+                </div>
               </div>
               <div class="form-group col-md-6">
                 <label for="street-name"
@@ -178,7 +249,25 @@
                   class="form-control"
                   placeholder="eg: Orchard Road"
                   v-model="dataForm.pick_drop_address.street_name"
+                  :class="
+                    typesubmit &&
+                    v$.dataForm.pick_drop_address.street_name.$error
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
+                <div
+                  class="invalid-feedback"
+                  v-if="
+                    typesubmit &&
+                    v$.dataForm.pick_drop_address.street_name.$error
+                  "
+                >
+                  <span
+                    v-if="v$.dataForm.pick_drop_address.street_name.required"
+                    >Please input street name!</span
+                  >
+                </div>
               </div>
               <div class="form-group col-md-3">
                 <label for="postal-code"
@@ -190,7 +279,25 @@
                   class="form-control"
                   placeholder="eg: 123456"
                   v-model="dataForm.pick_drop_address.postal_code"
+                  :class="
+                    typesubmit &&
+                    v$.dataForm.pick_drop_address.postal_code.$error
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
+                <div
+                  class="invalid-feedback"
+                  v-if="
+                    typesubmit &&
+                    v$.dataForm.pick_drop_address.postal_code.$error
+                  "
+                >
+                  <span
+                    v-if="v$.dataForm.pick_drop_address.postal_code.required"
+                    >Please input postal code!</span
+                  >
+                </div>
               </div>
             </div>
             <div class="col-md-12">
@@ -284,46 +391,126 @@
             <div class="col-md-3"></div>
             <div class="col-md-12">
               <div class="form-group col-md-6">
-                <label for="name-company">Name of Company</label>
+                <label for="name-company"
+                  >Name of Company <span class="label-required">*</span></label
+                >
                 <input
                   id="name-company"
                   type="text"
                   class="form-control"
                   placeholder="Please fill in full name. eg: Tree Pte Ltd"
-                  v-model="dataForm.billing_address.name_Company"
+                  v-model="dataForm.billing_address.name_company"
+                  :class="
+                    typesubmit &&
+                    v$.dataForm.billing_address.name_company.$error
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
+                <div
+                  class="invalid-feedback"
+                  v-if="
+                    typesubmit &&
+                    v$.dataForm.billing_address.name_company.$error
+                  "
+                >
+                  <span v-if="v$.dataForm.billing_address.name_company.required"
+                    >Please input name company!</span
+                  >
+                </div>
               </div>
               <div class="form-group col-md-6">
-                <label for="attention-to">Attention to</label>
+                <label for="attention-to"
+                  >Attention to <span class="label-required">*</span></label
+                >
                 <input
                   id="attention-to"
                   type="text"
                   class="form-control"
                   placeholder="eg: John"
                   v-model="dataForm.billing_address.attention_to"
+                  :class="
+                    typesubmit &&
+                    v$.dataForm.billing_address.attention_to.$error
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
+                <div
+                  class="invalid-feedback"
+                  v-if="
+                    typesubmit &&
+                    v$.dataForm.billing_address.attention_to.$error
+                  "
+                >
+                  <span v-if="v$.dataForm.billing_address.attention_to.required"
+                    >Please input attention to!</span
+                  >
+                </div>
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group col-md-6">
-                <label for="billing-address">Billing Address</label>
+                <label for="billing-address"
+                  >Billing Address <span class="label-required">*</span></label
+                >
                 <input
                   id="billing-address"
                   type="text"
                   class="form-control"
                   placeholder="Please fill in full address. eg: 3 Orchard Road, 01-15 Orchard Tower, Singapore 123456"
-                  v-model="dataForm.billing_address.billing_address"
+                  v-model="dataForm.billing_address.billing_address_input"
+                  :class="
+                    typesubmit &&
+                    v$.dataForm.billing_address.billing_address_input.$error
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
+                <div
+                  class="invalid-feedback"
+                  v-if="
+                    typesubmit &&
+                    v$.dataForm.billing_address.billing_address_input.$error
+                  "
+                >
+                  <span
+                    v-if="
+                      v$.dataForm.billing_address.billing_address_input.required
+                    "
+                    >Please input billing address!</span
+                  >
+                </div>
               </div>
               <div class="form-group col-md-6">
-                <label for="billing-email-address">Email Address</label>
+                <label for="billing-email-address"
+                  >Email Address <span class="label-required">*</span></label
+                >
                 <input
                   id="billing-email-address"
                   type="text"
                   class="form-control"
                   placeholder="eg: example@gmail.com"
                   v-model="dataForm.billing_address.email_address"
+                  :class="
+                    typesubmit &&
+                    v$.dataForm.billing_address.email_address.$error
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
+                <div
+                  class="invalid-feedback"
+                  v-if="
+                    typesubmit &&
+                    v$.dataForm.billing_address.email_address.$error
+                  "
+                >
+                  <span
+                    v-if="v$.dataForm.billing_address.email_address.required"
+                    >Please input email address!</span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -356,7 +543,25 @@
                     class="form-control"
                     placeholder="eg: Waston"
                     v-model="child.family_name"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.children[index].family_name.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.children[index].family_name.$error
+                    "
+                  >
+                    <span
+                      v-if="v$.dataForm.children[index].family_name.required"
+                      >Please input family name!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="child-given-name"
@@ -368,7 +573,24 @@
                     class="form-control"
                     placeholder="eg: Alice"
                     v-model="child.given_name"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.children[index].given_name.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.children[index].given_name.$error
+                    "
+                  >
+                    <span v-if="v$.dataForm.children[index].given_name.required"
+                      >Please input given name!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="child-birth"
@@ -380,7 +602,25 @@
                     class="form-control"
                     placeholder="eg: dd/mm/yyyy"
                     v-model="child.date_of_birth"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.children[index].date_of_birth.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.children[index].date_of_birth.$error
+                    "
+                  >
+                    <span
+                      v-if="v$.dataForm.children[index].date_of_birth.required"
+                      >Please input date of birth!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="child-student-id">Student ID</label>
@@ -460,6 +700,12 @@
                         class="form-check-input"
                         name="route[1]"
                         v-model="child.regular_bus_service"
+                        :class="
+                          typesubmit &&
+                          v$.dataForm.children[index].regular_bus_service.$error
+                            ? 'is-invalid'
+                            : ''
+                        "
                       />
                       2 Ways
                     </label>
@@ -470,6 +716,12 @@
                         class="form-check-input"
                         name="route[1]"
                         v-model="child.regular_bus_service"
+                        :class="
+                          typesubmit &&
+                          v$.dataForm.children[index].regular_bus_service.$error
+                            ? 'is-invalid'
+                            : ''
+                        "
                       />
                       1 Way (AM)
                     </label>
@@ -480,6 +732,12 @@
                         class="form-check-input"
                         name="route[1]"
                         v-model="child.regular_bus_service"
+                        :class="
+                          typesubmit &&
+                          v$.dataForm.children[index].regular_bus_service.$error
+                            ? 'is-invalid'
+                            : ''
+                        "
                       />
                       1 Way (PM)
                     </label>
@@ -499,8 +757,14 @@
                         value="two-way"
                         type="radio"
                         class="form-check-input"
-                        name="route[2]"
+                        name="route[1]"
                         v-model="child.shuttle_service"
+                        :class="
+                          typesubmit &&
+                          v$.dataForm.children[index].shuttle_service.$error
+                            ? 'is-invalid'
+                            : ''
+                        "
                       />
                       2 Ways
                     </label>
@@ -509,8 +773,14 @@
                         value="am-way"
                         type="radio"
                         class="form-check-input"
-                        name="route[2]"
+                        name="route[1]"
                         v-model="child.shuttle_service"
+                        :class="
+                          typesubmit &&
+                          v$.dataForm.children[index].shuttle_service.$error
+                            ? 'is-invalid'
+                            : ''
+                        "
                       />
                       1 Way (AM)
                     </label>
@@ -519,12 +789,35 @@
                         value="pm-way"
                         type="radio"
                         class="form-check-input"
-                        name="route[2]"
+                        name="route[1]"
                         v-model="child.shuttle_service"
+                        :class="
+                          typesubmit &&
+                          v$.dataForm.children[index].shuttle_service.$error
+                            ? 'is-invalid'
+                            : ''
+                        "
                       />
                       1 Way (PM)
                     </label>
                   </ul>
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.children[index].regular_bus_service.$error &&
+                      v$.dataForm.children[index].shuttle_service.$error
+                    "
+                  >
+                    <span
+                      v-if="
+                        v$.dataForm.children[index].regular_bus_service
+                          .required &&
+                        v$.dataForm.children[index].shuttle_service.required
+                      "
+                      >Please input family name!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <p>
@@ -595,7 +888,7 @@
               <div class="col-md-4">
                 <div class="col-md-12">
                   <button
-                    style="border: 0"
+                    style="border: 0; background: none"
                     type="button"
                     class="pull-right btn-remove removeChild"
                     @click="remove"
@@ -870,10 +1163,10 @@ export default {
         },
         billing_address: {
           same_as_above: false,
-          regard_payment: "mother",
-          name_Company: "",
+          regard_payment: "father",
+          name_company: "",
           attention_to: "",
-          billing_address: "",
+          billing_address_input: "",
           email_address: "",
         },
         children: [
@@ -887,8 +1180,8 @@ export default {
             gender: "male",
             start_date_of_service: "first_day_of_semester",
             start_date: "",
-            regular_bus_service: "two-way",
-            shuttle_service: "two-way",
+            regular_bus_service: "",
+            shuttle_service: "",
             medical_conditions: "",
             image_result: null,
           },
@@ -908,8 +1201,33 @@ export default {
         block_house_number: {
           required,
         },
+        street_name: {
+          required,
+        },
+        postal_code: {
+          required,
+        },
+        // unit_number: {
+        //   required,
+        // },
+        // name_building_condominium: {
+        //   required,
+        // },
       },
-      billing_address: {},
+      billing_address: {
+        name_company: {
+          required,
+        },
+        attention_to: {
+          required,
+        },
+        billing_address_input: {
+          required,
+        },
+        email_address: {
+          required,
+        },
+      },
       children: [],
       agree_service: {
         required,
@@ -971,6 +1289,12 @@ export default {
             start_date: {
               required,
             },
+            regular_bus_service: {
+              required,
+            },
+            shuttle_service: {
+              required,
+            },
             medical_conditions: {
               required,
             },
@@ -998,18 +1322,15 @@ export default {
         gender: "male",
         start_date_of_service: "first_day_of_semester",
         start_date: "",
-        regular_bus_service: "two-way",
-        shuttle_service: "two-way",
+        regular_bus_service: "",
+        shuttle_service: "",
         medical_conditions: "",
         image_result: null,
       });
     },
     remove: function (index) {
       this.dataForm.children.splice(index, 1);
-      $("#children_information")[0].scrollIntoView({
-        behavior: "smooth",
-      });
-      // window.scrollBy(0, -100); màn hình dừng tại vị trí?
+      $("html,body").animate({ scrollTop: 1400 }, "slow");
     },
     resetImage(index) {
       this.$refs["croppieRef_" + index][0].refreshCroppie();
@@ -1062,407 +1383,6 @@ export default {
 </script>
 
 <style>
+@import "../assets/scss/form-component.css";
 @import "@/assets/scss/croppie.min.css";
-#schoolBusForm {
-  font-size: 14px;
-  color: #333;
-}
-
-p {
-  margin: 0 0 10px !important;
-}
-/* Responsive */
-@media (min-width: 992px) {
-  .col-md-1,
-  .col-md-10,
-  .col-md-11,
-  .col-md-12,
-  .col-md-2,
-  .col-md-3,
-  .col-md-4,
-  .col-md-5,
-  .col-md-6,
-  .col-md-7,
-  .col-md-8,
-  .col-md-9 {
-    float: left;
-  }
-}
-
-/* Responsive */
-legend {
-  position: relative;
-  margin-bottom: 0 !important;
-  letter-spacing: 0.25px;
-  background: #006d29;
-  overflow: hidden;
-  height: 50px;
-  border-bottom: 0 !important;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-}
-
-legend p {
-  font-size: 20px;
-  padding-left: 12px;
-  margin: 0;
-  color: #ffffff;
-  padding-top: 10px;
-}
-
-legend i {
-  background: url(../assets/images/icon-car.png) no-repeat left;
-  display: inline-block;
-  width: 54px;
-  height: 55px;
-  position: absolute;
-  top: -5px;
-  right: 6px;
-}
-
-.wp-content {
-  border: 1px solid #006d29;
-  margin-bottom: 15px;
-  padding-top: 20px;
-}
-
-.pl-15 {
-  padding-left: 30px;
-}
-
-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.label-required {
-  color: #ed7878;
-}
-
-.gender {
-  padding-left: 30px;
-}
-
-.shuttle-table {
-  border: solid 1px;
-  width: 100%;
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: center;
-}
-
-.shuttle-table tr th,
-.shuttle-table tr td {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.shuttle-table tr td {
-  border: 1px solid;
-}
-
-.shuttle-thead-table {
-  background-color: #e2e2e2;
-  color: #000000;
-}
-
-.medical-conditions {
-  min-height: 70px;
-}
-
-.profile-container {
-  position: relative;
-}
-
-.profile-container:hover .image {
-  opacity: 0.3;
-}
-
-.profile-container:hover .middle {
-  opacity: 1;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.term {
-  text-align: justify;
-}
-
-.col-md-offset-1 {
-  margin-left: 8.33333333%;
-}
-
-.text-green {
-  color: #006d29;
-}
-
-.col-md-offset-2 {
-  margin-left: 16.66666667%;
-}
-
-.btn-add-more-child {
-  width: 200px;
-  background-color: #3c3e3c;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-}
-.btn-add-more-child:hover {
-  width: 200px;
-  background-color: #006d29;
-  color: #ffffff !important;
-  font-weight: 700;
-}
-
-.copyright {
-  font-size: 11px;
-  padding-top: 20px;
-  margin-bottom: 0px;
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
-}
-
-.btn-info {
-  color: #fff !important;
-  background-color: #5bc0de !important;
-  border-color: #46b8da !important;
-}
-
-.btn-info:hover {
-  color: #fff !important;
-  background-color: #31b0d5 !important;
-  border-color: #269abc !important;
-}
-
-.upload-demo {
-  height: 330px !important;
-}
-.upload-demo .cr-boundary {
-  max-width: 300px;
-  width: 100%;
-}
-.old_profile_img {
-  min-width: 200px;
-  max-width: 20px;
-  padding-bottom: 20px;
-}
-
-/*==================================== Croppie test */
-.croppie-container {
-  width: 100%;
-  height: 100%;
-}
-
-.croppie-container .cr-image {
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: 0 0;
-  max-height: none;
-  max-width: none;
-}
-
-.croppie-container .cr-boundary {
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-
-.croppie-container .cr-viewport {
-  position: absolute;
-  border: 2px solid #fff;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  box-shadow: 0 0 2000px 2000px rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
-
-.croppie-container .cr-original-image {
-  display: none;
-}
-
-.croppie-container .cr-vp-circle {
-  border-radius: 50%;
-}
-
-.croppie-container .cr-overlay {
-  z-index: 1;
-  position: absolute;
-  cursor: move;
-}
-
-.croppie-container .cr-slider-wrap {
-  width: 75%;
-  margin: 15px auto;
-  text-align: center;
-}
-
-.croppie-result {
-  position: relative;
-  overflow: hidden;
-}
-
-.croppie-result img {
-  position: absolute;
-}
-
-.croppie-container .cr-image,
-.croppie-container .cr-overlay,
-.croppie-container .cr-viewport {
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-/*************************************/
-/***** STYLING RANGE INPUT ***********/
-/*************************************/
-/*http://brennaobrien.com/blog/2014/05/style-input-type-range-in-every-browser.html */
-/*************************************/
-
-.cr-slider {
-  -webkit-appearance: none;
-  /*removes default webkit styles*/
-  /*border: 1px solid white; */ /*fix for FF unable to apply focus style bug */
-  width: 300px;
-  /*required for proper track sizing in FF*/
-  max-width: 100%;
-}
-
-.cr-slider::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 3px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 0;
-  border-radius: 3px;
-}
-
-.cr-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: #ddd;
-  margin-top: -6px;
-}
-
-.cr-slider:focus {
-  outline: none;
-}
-/*
-.cr-slider:focus::-webkit-slider-runnable-track {
-background: #ccc;
-}
-*/
-
-.cr-slider::-moz-range-track {
-  width: 100%;
-  height: 3px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 0;
-  border-radius: 3px;
-}
-
-.cr-slider::-moz-range-thumb {
-  border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: #ddd;
-  margin-top: -6px;
-}
-
-/*hide the outline behind the border*/
-.cr-slider:-moz-focusring {
-  outline: 1px solid white;
-  outline-offset: -1px;
-}
-
-.cr-slider::-ms-track {
-  width: 100%;
-  height: 5px;
-  background: transparent;
-  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
-  border-color: transparent; /*leave room for the larger thumb to overflow with a transparent border */
-  border-width: 6px 0;
-  color: transparent; /*remove default tick marks*/
-}
-.cr-slider::-ms-fill-lower {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-}
-.cr-slider::-ms-fill-upper {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-}
-.cr-slider::-ms-thumb {
-  border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: #ddd;
-  margin-top: 1px;
-}
-.cr-slider:focus::-ms-fill-lower {
-  background: rgba(0, 0, 0, 0.5);
-}
-.cr-slider:focus::-ms-fill-upper {
-  background: rgba(0, 0, 0, 0.5);
-}
-/*******************************************/
-
-/***********************************/
-/* Rotation Tools */
-/***********************************/
-.cr-rotate-controls {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  z-index: 1;
-}
-.cr-rotate-controls button {
-  border: 0;
-  background: none;
-}
-.cr-rotate-controls i:before {
-  display: inline-block;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 22px;
-}
-.cr-rotate-l i:before {
-  content: "â†º";
-}
-.cr-rotate-r i:before {
-  content: "â†»";
-}
-
-[src=""] {
-  width: 0 !important;
-  height: 0 !important;
-}
-/* end Croppie test */
-
-.btn-remove {
-  color: #b30000;
-  font-size: medium;
-  position: absolute;
-  right: 15px;
-}
-
-.btn-remove:hover {
-  color: #ff0000;
-}
 </style>
