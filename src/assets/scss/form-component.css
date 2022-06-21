@@ -140,13 +140,15 @@ label {
   margin-left: 16.66666667%;
 }
 
-.btn-add-more-child {
+a.btn-add-more-child,
+button.btn-add-more-child {
   width: 200px;
   background-color: #3c3e3c;
   color: #ffffff !important;
   font-weight: 700 !important;
 }
-.btn-add-more-child:hover {
+a.btn-add-more-child:hover,
+button.btn-add-more-child:hover {
   width: 200px;
   background-color: #006d29;
   color: #ffffff !important;
@@ -416,4 +418,52 @@ fieldset[disabled] .form-control {
 
 .form-control[readonly] {
   background-color: unset !important;
+}
+
+.invalid-feedback span {
+  font-size: 13px;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.custom-table table td,
+.custom-table table th {
+  border: solid 1px;
+}
+
+.shuttle-price tr td,
+.shuttle-price tr th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.shuttle-table .shuttle-thead-table tr th {
+  border: solid 1px;
+}
+
+.modal-header h4 {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-default.button-close {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.btn-default.button-close:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 600px !important;
+    margin: 1.75rem auto !important;
+  }
 }

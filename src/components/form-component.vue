@@ -167,16 +167,16 @@
                   >
                     <span
                       v-if="
-                        v$.dataForm.parents[index] &&
+                        v$.dataForm.parents[index].email_address.required &&
                         v$.dataForm.parents[index].email_address.required
+                          .$invalid
                       "
                       >Please input email address!</span
                     >
                     <span
                       v-if="
-                        v$.dataForm.parents[index] &&
-                        !v$.dataForm.parents[index].email_address.required &&
-                        v$.dataForm.parents[index].email_address.email
+                        v$.dataForm.parents[index].email_address.email &&
+                        v$.dataForm.parents[index].email_address.email.$invalid
                       "
                       >Email address is invalid!</span
                     >
@@ -546,8 +546,19 @@
                   "
                 >
                   <span
-                    v-if="v$.dataForm.billing_address.email_address.required"
+                    v-if="
+                      v$.dataForm.billing_address.email_address.required &&
+                      v$.dataForm.billing_address.email_address.required
+                        .$invalid
+                    "
                     >Please input email address!</span
+                  >
+                  <span
+                    v-if="
+                      v$.dataForm.billing_address.email_address.email &&
+                      v$.dataForm.billing_address.email_address.email.$invalid
+                    "
+                    >Email address is invalid!</span
                   >
                 </div>
               </div>
@@ -635,19 +646,6 @@
                   <label for="child-birth"
                     >Date of Birth <span class="label-required">*</span></label
                   >
-                  <!-- <input
-                    id="child-birth"
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: dd/mm/yyyy"
-                    v-model="child.date_of_birth"
-                    :class="
-                      typesubmit &&
-                      v$.dataForm.children[index].date_of_birth.$error
-                        ? 'is-invalid'
-                        : ''
-                    "
-                  /> -->
                   <DatePicker
                     v-model="child.date_of_birth"
                     :inputFormat="format_date_picker"
@@ -735,18 +733,52 @@
                   class="form-group col-md-12"
                   v-if="child.start_date_of_service == 'choose_date'"
                 >
-                  <!-- <input
-                    type="text"
-                    class="form-control"
-                    placeholder="eg: dd/mm/yyyy"
-                  /> -->
-                  <DatePicker
+                  <DatePickerCustom
+                    :input="child.start_date"
                     :inputFormat="format_date_picker"
-                    v-model="child.start_date"
-                    class="form-control"
-                    placeholder="eg: dd/mm/yyyy"
-                  ></DatePicker>
+                    @change-date="addDayWithoutTaking($event, index)"
+                  >
+                  </DatePickerCustom>
                 </div>
+                <!-- MODAL START DAY OF SERVICES -->
+                <div
+                  v-show="showModalClose"
+                  class="modal fade show"
+                  id="resetModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby=""
+                  aria-hidden="true"
+                  style="display: block; background-color: rgba(0, 0, 0, 0.5)"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <strong
+                          >Please refer to
+                          <a
+                            href="T&amp;C-Chatsworth.pdf"
+                            class="text-green"
+                            target="_blank"
+                            >Terms and Conditions</a
+                          >
+                          regarding the processing of applications and bus
+                          service charges.</strong
+                        >
+                      </div>
+                      <div class="modal-footer border-top">
+                        <button
+                          type="button"
+                          class="btn btn-default button-close m-0"
+                          @click="showModalClose = false"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- END MODAL START DAY OF SERVICES -->
                 <div class="form-group col-md-12">
                   <strong class="d-block">For Regular Bus Service:</strong>
                   <label class="ml-2" for="Route"
@@ -755,14 +787,14 @@
                   <ul class="list-route">
                     <label class="label-route d-block">
                       <input
-                        value="two-way"
+                        value="two-ways-1"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
-                        v-model="child.regular_bus_service"
+                        v-model="child.route_services"
                         :class="
                           typesubmit &&
-                          v$.dataForm.children[index].regular_bus_service.$error
+                          v$.dataForm.children[index].route_services.$error
                             ? 'is-invalid'
                             : ''
                         "
@@ -771,14 +803,14 @@
                     </label>
                     <label class="label-route d-block">
                       <input
-                        value="am-way"
+                        value="am-way-1"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
-                        v-model="child.regular_bus_service"
+                        v-model="child.route_services"
                         :class="
                           typesubmit &&
-                          v$.dataForm.children[index].regular_bus_service.$error
+                          v$.dataForm.children[index].route_services.$error
                             ? 'is-invalid'
                             : ''
                         "
@@ -787,14 +819,14 @@
                     </label>
                     <label class="label-route d-block">
                       <input
-                        value="pm-way"
+                        value="pm-way-1"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
-                        v-model="child.regular_bus_service"
+                        v-model="child.route_services"
                         :class="
                           typesubmit &&
-                          v$.dataForm.children[index].regular_bus_service.$error
+                          v$.dataForm.children[index].route_services.$error
                             ? 'is-invalid'
                             : ''
                         "
@@ -814,14 +846,15 @@
                   <ul class="list-route">
                     <label class="label-route d-block">
                       <input
-                        value="two-way"
+                        @click="showModalConfirm = true"
+                        value="two-ways-2"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
-                        v-model="child.shuttle_service"
+                        v-model="child.route_services"
                         :class="
                           typesubmit &&
-                          v$.dataForm.children[index].shuttle_service.$error
+                          v$.dataForm.children[index].route_services.$error
                             ? 'is-invalid'
                             : ''
                         "
@@ -830,14 +863,15 @@
                     </label>
                     <label class="label-route d-block">
                       <input
-                        value="am-way"
+                        @click="showModalConfirm = true"
+                        value="am-way-2"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
-                        v-model="child.shuttle_service"
+                        v-model="child.route_services"
                         :class="
                           typesubmit &&
-                          v$.dataForm.children[index].shuttle_service.$error
+                          v$.dataForm.children[index].route_services.$error
                             ? 'is-invalid'
                             : ''
                         "
@@ -846,14 +880,15 @@
                     </label>
                     <label class="label-route d-block">
                       <input
-                        value="pm-way"
+                        @click="showModalConfirm = true"
+                        value="pm-way-2"
                         type="radio"
                         class="form-check-input"
                         name="route[1]"
-                        v-model="child.shuttle_service"
+                        v-model="child.route_services"
                         :class="
                           typesubmit &&
-                          v$.dataForm.children[index].shuttle_service.$error
+                          v$.dataForm.children[index].route_services.$error
                             ? 'is-invalid'
                             : ''
                         "
@@ -865,20 +900,105 @@
                     class="invalid-feedback message_block"
                     v-if="
                       typesubmit &&
-                      v$.dataForm.children[index].regular_bus_service.$error &&
-                      v$.dataForm.children[index].shuttle_service.$error
+                      v$.dataForm.children[index].route_services.$error
                     "
                   >
                     <span
-                      v-if="
-                        v$.dataForm.children[index].regular_bus_service
-                          .required &&
-                        v$.dataForm.children[index].shuttle_service.required
-                      "
+                      v-if="v$.dataForm.children[index].route_services.required"
                       >Please choose route!</span
                     >
                   </div>
                 </div>
+                <!-- MODAL ROUTE SERVICES -->
+                <div
+                  v-show="showModalConfirm"
+                  class="modal fade show"
+                  id="resetModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby=""
+                  aria-hidden="true"
+                  style="display: block; background-color: rgba(0, 0, 0, 0.5)"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div
+                        class="modal-header text-center justify-content-center"
+                      >
+                        <h4 class="modal-title" id="resetModalLabel">
+                          Cairnhill 9 Shuttle Bus Fare - Academic Year 2021/2022
+                        </h4>
+                      </div>
+                      <div class="modal-body p-0">
+                        <div
+                          class="form-group col-md-12 custom-table"
+                          style="margin-top: 15px"
+                        >
+                          <table
+                            width="100%"
+                            style="
+                              border: solid 1px;
+                              font-size: 14px;
+                              line-height: 1.5;
+                              text-align: center;
+                            "
+                            class="shuttle-price"
+                          >
+                            <thead
+                              style="background-color: #e2e2e2; color: #000000"
+                            >
+                              <tr>
+                                <th style="text-align: center">S/NO</th>
+                                <th style="text-align: center">Route Type</th>
+                                <th style="text-align: center">
+                                  Up to 30 seater
+                                </th>
+                                <th style="text-align: center">
+                                  &gt;30 seater
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>One Way</td>
+                                <td>$535.00</td>
+                                <td>$500.00</td>
+                              </tr>
+                              <tr>
+                                <td>2</td>
+                                <td>Two Ways</td>
+                                <td>$1,020.00</td>
+                                <td>$950.00</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="form-group col-md-12 mb-0">
+                          <label for="postal_code">Remarks:</label>
+                          <p style="text-align: justify">
+                            - The above pricing is dependent on sufficient
+                            uptake for the service.<br />
+                            - Price includes GST and is chargeable for the
+                            semester (2 semesters in an academic year).<br />
+                            - Transport charges are payable twice a year, before
+                            the start of the semester and service.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          @click="showModalConfirm = false"
+                        >
+                          Confirm
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- END MODAL ROUTE SERVICES -->
                 <div class="form-group col-md-12">
                   <p>
                     Remarks: Invoice will be sent to parents once bus seat can
@@ -1035,9 +1155,9 @@
             </p>
             <p>
               All students are required to purchase a beacon. The beacon is a
-              security feature that allows us to ascertain your child’s location
+              security feature that allows us to ascertain your child's location
               when he is a rider on the bus on the bus. The yearly subscription
-              of $25 (before GST) will be charged to your child’s transport
+              of $25 (before GST) will be charged to your child's transport
               fares. Replacement beacons are charged at $25 (before GST) a
               piece. These beacons are
               <strong class="text-green">non-transferable.</strong> Students on
@@ -1196,15 +1316,18 @@ if (document.querySelectorAll('[src="/croppie/croppie.min.js"]').length < 1) {
   document.head.appendChild(pluginJqueryCroppie);
 }
 import CroppieImage from "./CroppieImage.vue";
+import DatePickerCustom from "./DatePickerCustom.vue";
 import { required, email } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import $ from "jquery";
 import DatePicker from "vue3-datepicker";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default {
   components: {
     CroppieImage,
     DatePicker,
+    DatePickerCustom,
   },
   setup() {
     return {
@@ -1275,8 +1398,7 @@ export default {
             gender: "male",
             start_date_of_service: "first_day_of_semester",
             start_date: null,
-            regular_bus_service: "",
-            shuttle_service: "",
+            route_services: "",
             medical_conditions: "",
             image_result: null,
             rawImg: null,
@@ -1285,6 +1407,9 @@ export default {
         agree_service: false,
         read_understood: false,
       },
+      showModalConfirm: false,
+      showModalClose: false,
+      flagShowModalClose: false,
     };
   },
   validations() {
@@ -1341,6 +1466,7 @@ export default {
         },
         email_address: {
           required,
+          email,
         },
       };
     }
@@ -1374,25 +1500,6 @@ export default {
               },
             };
           }
-          // if (this.dataForm.first_contact == parent.type) {
-          //   valid = {
-          //     family_name: {
-          //       required,
-          //     },
-          //     first_name: {
-          //       required,
-          //     },
-          //     mobile_phone: {
-          //       required,
-          //     },
-          //     office_phone: {
-          //       required,
-          //     },
-          //     email_address: {
-          //       required,
-          //     },
-          //   };
-          // }
           ValidateDataForm.parents[key] = valid;
         });
       }
@@ -1417,10 +1524,7 @@ export default {
             start_date: {
               required,
             },
-            regular_bus_service: {
-              required,
-            },
-            shuttle_service: {
+            route_services: {
               required,
             },
             medical_conditions: {
@@ -1451,8 +1555,7 @@ export default {
         gender: "male",
         start_date_of_service: "first_day_of_semester",
         start_date: "",
-        regular_bus_service: "",
-        shuttle_service: "",
+        route_services: "",
         medical_conditions: "",
         image_result: null,
       });
@@ -1461,7 +1564,6 @@ export default {
       const vm = this;
       this.dataForm.children.splice(index, 1);
       this.$forceUpdate();
-      console.log(this.dataForm.children);
       $("html,body").animate({ scrollTop: 1400 }, "slow");
       setTimeout(() => {
         Object.entries(this.dataForm.children).forEach(([key, child]) => {
@@ -1491,7 +1593,6 @@ export default {
           );
         };
       }
-      console.log(vm.dataForm.children);
     },
     onPickFile(index) {
       this.$refs[`fileInput_${index}`][0].click();
@@ -1509,6 +1610,13 @@ export default {
       fileReader.readAsDataURL(files[0]);
       this.image = files[0];
     },
+    addDayWithoutTaking(event, key) {
+      this.dataForm.children[key].start_date = event.date ?? null;
+      if (!this.flagShowModalClose) {
+        this.flagShowModalClose = true;
+        this.showModalClose = true;
+      }
+    },
     submit() {
       this.typesubmit = true;
       this.v$.$validate();
@@ -1522,12 +1630,10 @@ export default {
           window.scrollBy(0, -100);
         }, 200);
       }
-      console.log(this.dataForm.parents[0].family_name);
-      // this.dataForm.parents.family_name =
-      //   e.target.dataForm.parents.family_name.value;
+      console.log(this.dataForm);
     },
   },
-};
+};0
 </script>
 
 <style>
