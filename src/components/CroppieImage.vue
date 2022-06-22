@@ -56,12 +56,12 @@ export default {
         }
       });
     },
-    bindCroppie(rawImg, zoom = null) {
+    bindCroppie(image, zoom = null) {
       const vm = this;
       vm.hasCroppie = true;
       this.croppie_obj
         .bind({
-          url: rawImg,
+          url: image,
           zoom: zoom,
         })
         .then(function () {
