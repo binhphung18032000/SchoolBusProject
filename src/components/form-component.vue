@@ -699,7 +699,7 @@
                     <input
                       type="radio"
                       class="form-check-input"
-                      name="gender"
+                      name="child"
                       value="male"
                       v-model="child.gender"
                     />
@@ -709,7 +709,7 @@
                     <input
                       type="radio"
                       class="form-check-input"
-                      name="gender"
+                      name="child"
                       value="female"
                       v-model="child.gender"
                     />
@@ -1633,7 +1633,8 @@ export default {
       console.log(this.dataForm);
     },
   },
-};0
+};
+0;
 </script>
 
 <style>
