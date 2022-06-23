@@ -461,6 +461,9 @@ fieldset[disabled] .form-control {
   border-color: #adadad;
 }
 
+.invalid-feedback {
+  display: block !important;
+}
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 600px !important;

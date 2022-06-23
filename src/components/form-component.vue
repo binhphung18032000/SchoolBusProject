@@ -1,19 +1,12 @@
 <template>
   <div class="container">
     <div id="schoolBusForm" class="col-md-12">
-      <div v-if="errors">
-        <h1>{{ errors }}</h1>
-        <div v-for="(error, index) in errors" :key="index">
-          <p>
-            {{ error }}
-          </p>
-        </div>
-      </div>
       <form
         role="form"
         id="registerForm"
         novalidate="novalidate"
         @submit.prevent="submit"
+        v-if="!isSuccess"
       >
         <fieldset>
           <!-- Parent's Information -->
@@ -302,7 +295,7 @@
                 >
                 <input
                   id="postal-code"
-                  type="text"
+                  type="number"
                   class="form-control"
                   placeholder="eg: 123456"
                   v-model="dataForm.location.postal_code"
@@ -316,8 +309,19 @@
                   class="invalid-feedback"
                   v-if="typesubmit && v$.dataForm.location.postal_code.$error"
                 >
-                  <span v-if="v$.dataForm.location.postal_code.required"
+                  <span
+                    v-if="
+                      v$.dataForm.location.postal_code.required &&
+                      v$.dataForm.location.postal_code.required.$invalid
+                    "
                     >Please input postal code!</span
+                  >
+                  <span
+                    v-if="
+                      v$.dataForm.location.postal_code.maxLength &&
+                      v$.dataForm.location.postal_code.maxLength.$invalid
+                    "
+                    >Max length of postal code is 6 numbers!</span
                   >
                 </div>
               </div>
@@ -327,7 +331,7 @@
                 <label for="unit-number">Unit Number </label>
                 <input
                   id="unit-number"
-                  type="text"
+                  type="number"
                   class="form-control"
                   placeholder="eg: 01-15"
                   v-model="dataForm.location.unit"
@@ -399,7 +403,7 @@
                   >
                   <label class="pl-15"
                     ><input
-                      value="details-below"
+                      value="other"
                       type="radio"
                       class="form-check-input"
                       name="billing-pick"
@@ -626,6 +630,10 @@
                         ? 'is-invalid'
                         : ''
                     "
+                    :disabledDates="{
+                      dates: [],
+                      predicate: (Date) => Date > nowDay,
+                    }"
                   ></DatePicker>
                   <div
                     class="invalid-feedback"
@@ -650,7 +658,29 @@
                     class="form-control"
                     placeholder="eg: 99985610001"
                     v-model="child.school_code"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.child_info[index].school_code.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.child_info[index].school_code.$error
+                    "
+                  >
+                    <span
+                      v-if="
+                        v$.dataForm.child_info[index].school_code.maxLength &&
+                        v$.dataForm.child_info[index].school_code.maxLength
+                          .$invalid
+                      "
+                      >Max length of student id is 10 characters!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="child-grade">Grade</label>
@@ -660,7 +690,26 @@
                     class="form-control"
                     placeholder="eg: G1"
                     v-model="child.grade"
+                    :class="
+                      typesubmit && v$.dataForm.child_info[index].grade.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   />
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit && v$.dataForm.child_info[index].grade.$error
+                    "
+                  >
+                    <span
+                      v-if="
+                        v$.dataForm.child_info[index].grade.maxLength &&
+                        v$.dataForm.child_info[index].grade.maxLength.$invalid
+                      "
+                      >Max length of grade is 10 characters!</span
+                    >
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label for=""
@@ -705,11 +754,33 @@
                   v-if="child.type_of_service == 'choose_date'"
                 >
                   <DatePickerCustom
-                    :input="child.start_date"
+                    :input="child.date_start"
                     :inputFormat="format_date_picker"
                     @change-date="showDateStartModalClose($event, index)"
+                    :disabledDates="{
+                      dates: [],
+                      predicate: (Date) => Date <= nowDay,
+                    }"
+                    :class="
+                      typesubmit &&
+                      v$.dataForm.child_info[index].date_start.$error
+                        ? 'is-invalid'
+                        : ''
+                    "
                   >
                   </DatePickerCustom>
+                  <div
+                    class="invalid-feedback"
+                    v-if="
+                      typesubmit &&
+                      v$.dataForm.child_info[index].date_start.$error
+                    "
+                  >
+                    <span
+                      v-if="v$.dataForm.child_info[index].date_start.required"
+                      >Please choose date start!</span
+                    >
+                  </div>
                 </div>
                 <!-- MODAL START DAY OF SERVICES -->
                 <div
@@ -1253,6 +1324,17 @@
             </div>
           </div>
           <div class="col-md-12 text-center">
+            <div v-if="errors" class="is-invalid">
+              <div v-for="(error, index) in errors" :key="index">
+                <div
+                  style="width: 700px; white-space: pre-wrap; left: 17%"
+                  class="alert alert-danger text-uppercase text-danger"
+                  role="alert"
+                >
+                  {{ Array.isArray(error) ? error.join("\n ") : error }}
+                </div>
+              </div>
+            </div>
             <button type="submit" class="btn btn-add-more-child" id="submit">
               Submit
             </button>
@@ -1273,6 +1355,11 @@
           </div>
         </fieldset>
       </form>
+      <div v-else class="alert alert-success" role="alert">
+        <span class="alert-heading m-2 text-success">
+          Thank you for registering with Tong Tar Transport Service PTE LTD.
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -1290,7 +1377,7 @@ if (document.querySelectorAll('[src="/croppie/croppie.min.js"]').length < 1) {
 }
 import CroppieImage from "./CroppieImage.vue";
 import DatePickerCustom from "./DatePickerCustom.vue";
-import { required, email } from "@vuelidate/validators";
+import { required, email, maxLength } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import $ from "jquery";
 import DatePicker from "vue3-datepicker";
@@ -1311,6 +1398,8 @@ export default {
   },
   data() {
     return {
+      nowDay: moment()._d,
+      isSuccess: false,
       errors: null,
       format_date_picker: "dd/MM/yyyy",
       typesubmit: false,
@@ -1408,6 +1497,7 @@ export default {
         },
         postal_code: {
           required,
+          maxLength: maxLength(6),
         },
       },
       company: {
@@ -1481,7 +1571,7 @@ export default {
       }
       if (this.dataForm.child_info) {
         Object.entries(this.dataForm.child_info).forEach(([key, child]) => {
-          child = {
+          let validChild = {
             family_name: {
               required,
             },
@@ -1491,11 +1581,23 @@ export default {
             date_of_birth: {
               required,
             },
+            date_start: {},
             route_service: {
               required,
             },
+            school_code: {
+              maxLength: maxLength(10),
+            },
+            grade: {
+              maxLength: maxLength(10),
+            },
           };
-          ValidateDataForm.child_info[key] = child;
+          if (child.type_of_service == "choose_date") {
+            validChild.date_start = {
+              required,
+            };
+          }
+          ValidateDataForm.child_info[key] = validChild;
         });
       }
     }
@@ -1590,7 +1692,14 @@ export default {
           student.date_of_birth = moment(student.date_of_birth).format(
             "DD/MM/YYYY"
           );
-          student.date_start = moment(student.date_start).format("DD/MM/YYYY");
+          if (student.type_of_service == "choose_date") {
+            student.date_start = moment(student.date_start).format(
+              "DD/MM/YYYY"
+            );
+          } else {
+            delete student.date_start;
+          }
+
           return student;
         });
         vm.axios
@@ -1598,6 +1707,7 @@ export default {
           .then(function (response) {
             if (response.status !== 200 || !response.data.success)
               throw response.data;
+            vm.isSuccess = true;
           })
           .catch(function (error) {
             console.log(error);

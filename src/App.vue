@@ -22,7 +22,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <img src="./assets/images/logo.png" alt="LOGO School Bus" />
+          <a href="http://localhost:8080/">
+            <img src="./assets/images/logo.png" alt="LOGO School Bus" />
+          </a>
         </div>
         <div class="col-md-8">
           <h2 class="heading-title text-center">Transport Application Form</h2>

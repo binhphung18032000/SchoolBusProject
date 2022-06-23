@@ -8,6 +8,7 @@
     placeholder="eg: dd/mm/yyyy"
     style="width: 100%"
     :typeable="false"
+    :disabledDates="disabledDates ?? null"
   ></DatePicker>
 </template>
 <script>
