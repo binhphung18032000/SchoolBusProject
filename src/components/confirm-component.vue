@@ -46,25 +46,5 @@ export default {
 </script>
 
 <style>
-.wp-confirm {
-  font-size: 18px;
-  display: inline-block;
-  margin: 10px 0;
-}
-
-.wp-confirm p {
-  margin-bottom: 10px;
-}
-
-.font-size-20 {
-  font-size: 20px !important;
-}
-
-.wp-button {
-  margin-top: 20px;
-}
-
-button {
-  cursor: pointer;
-}
+@import "../assets/css/confirm-component.css";
 </style>

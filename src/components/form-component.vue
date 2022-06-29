@@ -1725,6 +1725,6 @@ export default {
 </script>
 
 <style>
-@import "../assets/scss/form-component.css";
-@import "@/assets/scss/croppie.min.css";
+@import "../assets/css/form-component.css";
+@import "@/assets/css/croppie.min.css";
 </style>

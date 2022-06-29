@@ -22,7 +22,9 @@
     "vue-croppie": "^2.0.2",
     "vue-router": "4",
     "vue3-datepicker": "^0.3.4",
-    "vuelidate": "^0.7.7"
+    "vuelidate": "^0.7.7",
+    "bootstrap": "^4.0.0-beta",
+    "jquery": "^3.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -30,12 +32,10 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "bootstrap": "^4.0.0-beta",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
-    "jquery": "^3.6.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1"
   },

@@ -69,48 +69,6 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@900&display=swap");
-body {
-  font-family: "Lato", sans-serif !important;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333;
-  background-color: #fff;
-}
-
-#required-browser {
-  background-color: #fffddb;
-  height: 35px;
-  padding: 5px;
-}
-
-#closeRequireBrowser {
-  cursor: pointer;
-  margin-right: 15px;
-}
-
-.close-button {
-  float: right;
-}
-
-.heading-title {
-  color: #006d29;
-  font-weight: 700;
-  font-size: 30px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.school-name {
-  font-size: 28px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.green-line {
-  border-color: #006d29;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
+@import "./assets/css/app.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 </style>
